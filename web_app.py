@@ -201,6 +201,99 @@ def tools():
             <a href="/resources">Resources</a><br>
         '''
 
+from flask import Flask, render_template, redirect, url_for, session
+
+@app.route('/pomodoro')
+def web_pomodoro():
+    if 'email' not in session:
+        return redirect(url_for('web_login'))
+        
+    # We send an HTML page containing JavaScript to handle the countdown countdown
+    return '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>🍅 Pomodoro Timer</title>
+        <style>
+            body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #fcf8f8; }
+            .timer-box { border: 2px solid #e74c3c; display: inline-block; padding: 30px; border-radius: 15px; background: white; }
+            #timer { font-size: 60px; font-weight: bold; color: #e74c3c; margin: 20px 0; }
+            button { padding: 10px 20px; font-size: 18px; cursor: pointer; background-color: #e74c3c; color: white; border: none; border-radius: 5px; }
+            button:hover { background-color: #c0392b; }
+            .status { font-size: 20px; color: #555; }
+        </style>
+    </head>
+    <body>
+
+        <div class="timer-box">
+            <h1>🍅 Student Toolkit Pomodoro </h1>
+            <div class="status" id="status-text">Focus Mode: Concentrate on your work!</div>
+            <div id="timer">25:00</div>
+            <button id="start-btn" onclick="toggleTimer()">Start Timer</button>
+            <br><br>
+            <a href="/dashboard">Back to Dashboard</a>
+        </div>
+
+        <script>
+            let timeLeft = 25 * 60; // 25 minutes in seconds
+            let timerInterval = null;
+            let isRunning = false;
+            let isFocusMode = true;
+
+            function updateDisplay() {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                
+                // Formats numbers nicely (adds leading zero if less than 10)
+                let displayMin = minutes < 10 ? "0" + minutes : minutes;
+                let displaySec = seconds < 10 ? "0" + seconds : seconds;
+                
+                document.getElementById("timer").innerText = displayMin + ":" + displaySec;
+            }
+
+            function toggleTimer() {
+                if (isRunning) {
+                    // Pause functionality
+                    clearInterval(timerInterval);
+                    document.getElementById("start-btn").innerText = "Resume";
+                    isRunning = false;
+                } else {
+                    // Start functionality
+                    isRunning = true;
+                    document.getElementById("start-btn").innerText = "Pause";
+                    
+                    timerInterval = setInterval(() => {
+                        if (timeLeft > 0) {
+                            timeLeft--;
+                            updateDisplay();
+                        } else {
+                            // When time hits 00:00
+                            clearInterval(timerInterval);
+                            isRunning = false;
+                            alert("⏰ Time is up!");
+                            
+                            if (isFocusMode) {
+                                // Switch to break mode
+                                isFocusMode = false;
+                                timeLeft = 5 * 60; // 5 minute break
+                                document.getElementById("status-text").innerText = "☕ Break Mode: Relax and rest!";
+                                document.getElementById("start-btn").innerText = "Start Break";
+                            } else {
+                                // Switch back to focus mode
+                                isFocusMode = true;
+                                timeLeft = 25 * 60; // 25 minute focus
+                                document.getElementById("status-text").innerText = "Focus Mode: Concentrate on your work!";
+                                document.getElementById("start-btn").innerText = "Start Focus";
+                            }
+                            updateDisplay();
+                        }
+                    }, 1000); // Ticks exactly every 1000ms (1 second)
+                }
+            }
+        </script>
+    </body>
+    </html>
+    '''
 
 if __name__ == '__main__':
     # Start the web server on your local machine

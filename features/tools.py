@@ -34,60 +34,49 @@ resources_={
           
     }
 
-def attendance_tracker():
+def attendance_tracker(lec_attended=None, total_lec=None):
     print("\n--- Attendance Tracker ---")
-    lec_attended = int(input("Enter the number of lectures attended: "))
-    total_lec = int(input("Enter the total number of lectures: "))
-    print(f"\n✅ Your Attendance Percentage is: {(lec_attended/total_lec)*100:.2f}%")
-    return
+    if lec_attended is None:
+        return f"❌ Number of lectures attended cannot be empty. Please try again."
+    if total_lec is None:
+        return f"❌ Total number of lectures cannot be empty. Please try again."
+    if lec_attended > total_lec:
+        return f"❌ Lectures attended cannot be greater than total lectures. Please try again."
+    return f"\n✅ Your Attendance Percentage is: {(lec_attended/total_lec)*100:.2f}%"   
+    
 
-def sgpa_calculator():
-    print("\n--- SGPA Calculator ---")
-    try:
-        num_subjects = int(input("Enter the number of subjects: "))
-        total_credits = 0
-        total_points = 0
-        
-        for i in range(num_subjects):
-            grade = int(input(f"Enter the grade point for subject {i+1} (10, 9, 8, 7, 6): ") )
-            if(grade>10 or grade<1):
-                print("❌ Invalid grade point. Please try again.")
-                return 
-            credits = int(input(f"Enter the credits for subject {i+1}: "))
-            total_credits += credits
-            total_points += grade * credits
+# features/academics.py
 
-    except ValueError:
-        print("❌ Invalid input. Please enter numeric values and try again.")
-        return 
+def calculate_sgpa(grades_list, credits_list):
+    """
+    Accepts two lists of integers.
+    Returns (sgpa, error_message)
+    """
+    total_credits = 0
+    total_points = 0
+    
+    for grade, credits in zip(grades_list, credits_list):
+        if grade > 10 or grade < 1:
+            return None, "Invalid grade point found. Must be between 1 and 10."
+            
+        total_credits += credits
+        total_points += grade * credits
 
     if total_credits == 0:
-        print("❌ Total credits cannot be zero.")
-        return 
+        return None, "Total credits cannot be zero."
 
     sgpa = total_points / total_credits
-    print(f"\n✅ Your Calculated SGPA is: {sgpa:.2f}")
-    return
+    return round(sgpa, 2), None
 
-def pomodoro_timer():
-    print("\n--- Pomodoro Timer ---")
-    time_=60*25
-    print("Pomodoro timer started for 25 minutes. Focus on your work!")
-    while time_>0:
-        min,sec=divmod(time_,60)
-        print(f"{min:02d}:{sec:02d}",end="\r")
-        time.sleep(1)
-        time_-=1
-    print("\n⏰ Time's up! Take a 5-minute break.")
+ 
+# def chatbot():
+#     print("\n--- Launching Saathi, your AI Study Buddy ---\n")
+#     Saathi()
 
-def chatbot():
-    print("\n--- Launching Saathi, your AI Study Buddy ---\n")
-    Saathi()
-
-def resources():
-    print("---RESOURCES---")
-    for category in resources_:
-        print(f"\n{category.upper()} :")
-        for topic  in resources_[category]:
-            print(f"{topic} : {resources_[category][topic]}")
-        print(20*"-")
+# def resources():
+#     print("---RESOURCES---")
+#     for category in resources_:
+#         print(f"\n{category.upper()} :")
+#         for topic  in resources_[category]:
+#             print(f"{topic} : {resources_[category][topic]}")
+#         print(20*"-")

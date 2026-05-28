@@ -89,26 +89,25 @@ def view_completed_tasks(email) :
     cursor.execute("SELECT * FROM tasks WHERE student_email = ? and completed = 1", (email,))
     tasks=cursor.fetchall()
     if tasks:
-        print(50*"=")
-        print("✅ Following are completed Tasks!")
-        for task in tasks:
-            print(f"ID: {task[0]}, Task: {task[2]}, Deadline: {task[4]}, Completed: {task[3]}")
-        print(50*"=")
+        conn.commit()
+        conn.close()
+        return tasks
     else:
+        conn.commit()
+        conn.close()
         return f"❌ No completed tasks found."
-    conn.close()
-
+ 
 def view_incomplete_tasks(email):
     conn=sqlite3.connect('student_toolkit.db')
     cursor=conn.cursor()
     cursor.execute('''SELECT * FROM tasks WHERE student_email=? and completed=0''',(email,))
     tasks=cursor.fetchall()
     if tasks:
-        print(50*"=")
-        print("✅ Following are incomplete Tasks!")
-        for task in tasks:
-            print(f"ID: {task[0]}, Task: {task[2]}, Deadline: {task[4]}, Completed: {task[3]}")
-        print(50*"=")
+        conn.commit()
+        conn.close()
+        return tasks
     else:
-        print("❌ No incomplete tasks found.")
-    conn.close()
+        conn.commit()
+        conn.close()
+        return f"❌ No incomplete tasks found."
+     
