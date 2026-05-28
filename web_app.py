@@ -476,6 +476,20 @@ def web_sgpa_calculator():
         </form>
         <br><a href="/dashboard">Back to Dashboard</a>
     '''
+@app.route('/resources')
+def resource():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+
+    resources_=resources()   
+    html_output=f"<h1>Resources</h1>"
+    for category in resources_:
+        html_output+=f"<h2>{category.upper()}<hr>"
+        for topic  in resources_[category]:
+            html_output+=f"<h3>{topic} : <a href='{resources_[category][topic]}'>{resources_[category][topic]}</a></h3><br>"
+    html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
+    return html_output
+    
 
 @app.route('/tools')
 def tools():

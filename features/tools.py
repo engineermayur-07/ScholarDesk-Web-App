@@ -74,14 +74,9 @@ def calculate_sgpa(grades_list, credits_list):
     return round(sgpa, 2), None
 
  
-# def chatbot():
-#     print("\n--- Launching Saathi, your AI Study Buddy ---\n")
-#     Saathi()
+def chatbot():
+    print("\n--- Launching Saathi, your AI Study Buddy ---\n")
+    Saathi()
 
-# def resources():
-#     print("---RESOURCES---")
-#     for category in resources_:
-#         print(f"\n{category.upper()} :")
-#         for topic  in resources_[category]:
-#             print(f"{topic} : {resources_[category][topic]}")
-#         print(20*"-")
+def resources():
+    return resources_    
