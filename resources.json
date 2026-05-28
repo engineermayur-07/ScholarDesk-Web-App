@@ -1,0 +1,32 @@
+{
+    "resources":{
+         "documentation":{
+            "c language":"https://www.cprogramming.com/tutorial/c-tutorial.html",
+            "python":"https://www.python.org/doc/",
+            "java":"https://docs.oracle.com/en/java/",
+            "javascript":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+            "html":"https://developer.mozilla.org/en-US/docs/Web/HTML",
+            "css":"https://developer.mozilla.org/en-US/docs/Web/CSS",
+            "sql":"https://www.w3schools.com/sql/"  ,
+            "sqlite":"https://www.sqlite.org/docs.html",
+            "git":"https://git-scm.com/doc"
+         },
+         "notes":{
+            "html":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/YouTube/The%20Ultimate%20HTML%20handbook.pdf",
+            "css":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/notes/CSS_Complete_Notes.pdf",
+            "javascript":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/notes/JS_Chapterwise_Notes.pdf",
+            "php":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/cheatsheets/Php%20Cheatsheet.pdf",
+            "c programming":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/YouTube/The%20Ultimate%20C%20Handbook.pdf",
+            "c++":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/cheatsheets/C%2B%2B%20Cheatsheet.pdf",
+            "java":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/notes/Java_Complete_Notes.pdf",
+            "python":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/YouTube/The%20Ultimate%20Python%20Handbook.pdf",
+            "dsa":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/notes/DSA_CompleteNotes.pdf",
+            "sql":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/YouTube/MySQL%20Handbook.pdf",
+            "mysql":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/cheatsheets/MySQL%20Cheatsheet.pdf",
+            "mongodb":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/YouTube/MongoDB%20Handbook.pdf",
+            "django":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/cheatsheets/Django%20Cheatsheet.pdf",
+            "flask":"https://cwh-full-next-space.fra1.cdn.digitaloceanspaces.com/cheatsheets/Flask%20Cheatsheet.pdf"
+         }
+          
+    }
+}
