@@ -175,9 +175,9 @@ def tasks():
             <a href="/view_tasks">View Tasks</a><br>
             <a href="/add_task">Add Task</a><br>
             <a href="/delete_task">Delete Task</a><br>
-            <a href="/completed_tasks">Completed Tasks</a><br>
-            <a href="/incomplete_tasks">Incomplete Tasks</a><br>
-            <a href="/mark_task">Mark Task as Completed</a><br>
+            <a href="/view_completed_tasks">Completed Tasks</a><br>
+            <a href="/view_incomplete_tasks">Incomplete Tasks</a><br>
+            <a href="/mark_task_completed">Mark Task as Completed</a><br>
         '''
 @app.route('/view_tasks')
 def view_task():
@@ -225,6 +225,44 @@ def delete_task():
         </form>
         <br><a href='/dashboard'>Back to Dashboard</a>
     '''
+@app.route('/mark_task_completed',methods=['GET','POST'])
+def mark_task_completed():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        task_id = request.form['task_id']
+        Completed_tasks(session['email'],task_id)
+        return redirect(url_for('view_task'))
+    
+    return '''
+        <h1>📝 Mark Task Completion</h1>
+        <form method="post">
+            Task ID: <input type="text" name="task_id" required><br>
+            <input type="submit" value="Mark Task">
+        </form>
+        <br><a href='/dashboard'>Back to Dashboard</a>
+    '''
+@app.route('/view_completed_tasks',methods=['GET','POST'])
+def view_completed_task():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    html_output=f"<h1>Completed Tasks</h1>"
+    tasks=view_completed_tasks(session['email'])
+    for task in tasks:
+        html_output+=f"<h2> ID :{task[0]}  Task :{task[2]}  Deadline :{task[4]}"
+    html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
+    return html_output
+@app.route('/view_incomplete_tasks',methods=['GET','POST'])
+def view_incomplete_task():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    html_output=f"<h1>Inomplete Tasks</h1>"
+    tasks=view_incomplete_tasks(session['email'])
+    for task in tasks:
+        html_output+=f"<h2> ID :{task[0]}  Task :{task[2]}  Deadline :{task[4]}"
+    html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
+    return html_output
+
 
 @app.route('/tools')
 def tools():
