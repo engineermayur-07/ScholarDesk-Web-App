@@ -98,8 +98,8 @@ def reset_password_route():
 @app.route('/dashboard')
 def dashboard():
     if 'email' not in session:
-        return redirect(url_for('login'))
-    return f"Welcome to your Dashboard, {session.get('name')}!" '''
+        return redirect(url_for('login_user'))
+    return f'''<h1>Welcome to your Dashboard, {session.get('name')}!</h1> 
             <p>Here you can access all your tools and resources.</p>
             <ul>
                 <li><a href="/notes">Notes</a></li>
@@ -115,7 +115,7 @@ def dashboard():
 @app.route('/notes')
 def notes():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     return '''
             <h1>Notes Section</h1>
             <p>Here you can create, view, and manage your notes.</p>
@@ -129,7 +129,7 @@ def notes():
 @app.route('/view_notes')
 def web_view_notes():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
         
      
     notes_data = view_notes(session['email'])
@@ -147,7 +147,7 @@ def web_view_notes():
 @app.route('/add_note', methods=['GET', 'POST'])
 def web_add_note():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     
     if request.method == 'POST':
         note = request.form['note']
@@ -168,7 +168,7 @@ def web_add_note():
 @app.route('/tasks')
 def tasks():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     return '''
             <h1>Tasks Section</h1>
             <p>Here you can create, view, and manage your tasks.</p>
@@ -182,7 +182,7 @@ def tasks():
 @app.route('/view_tasks')
 def view_task():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     tasks = view_tasks(session['email'])
     html_output= "<h1> Your Tasks</h1><hr>"
     for task in tasks:
@@ -192,7 +192,7 @@ def view_task():
 @app.route('/add_task',methods=['GET','POST'])
 def add_task():
     if 'email' not in session:
-        return redirect(url_for('login')) 
+        return redirect(url_for('login_user')) 
     if request.method == 'POST':
         task = request.form['task']
         date = request.form['date']
@@ -211,7 +211,7 @@ def add_task():
 @app.route('/delete_task',methods=['GET','POST'])
 def delete_task():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     if request.method == 'POST':
         task_id = request.form['task_id']
         delete_tasks(session['email'],task_id)
@@ -228,7 +228,7 @@ def delete_task():
 @app.route('/mark_task_completed',methods=['GET','POST'])
 def mark_task_completed():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     if request.method == 'POST':
         task_id = request.form['task_id']
         Completed_tasks(session['email'],task_id)
@@ -245,7 +245,7 @@ def mark_task_completed():
 @app.route('/view_completed_tasks',methods=['GET','POST'])
 def view_completed_task():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     html_output=f"<h1>Completed Tasks</h1>"
     tasks=view_completed_tasks(session['email'])
     for task in tasks:
@@ -255,7 +255,7 @@ def view_completed_task():
 @app.route('/view_incomplete_tasks',methods=['GET','POST'])
 def view_incomplete_task():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     html_output=f"<h1>Inomplete Tasks</h1>"
     tasks=view_incomplete_tasks(session['email'])
     for task in tasks:
@@ -264,10 +264,10 @@ def view_incomplete_task():
     return html_output
 
 
-@app.route('/finance',methods=['GET','POSt'])
+@app.route('/finance',methods=['GET','POST'])
 def finance():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     return '''
             <h1>Expense Tracker</h1>
             <a href="/view_expense">View Expense Logs </a><br>
@@ -276,7 +276,7 @@ def finance():
 @app.route('/view_expense',methods=['GET','POST'])
 def view_expense():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     expenses=view_expenses(session['email'])
     html_output=f"<h1>Your Expense Log</h1>"
     for expense in expenses:
@@ -286,7 +286,7 @@ def view_expense():
 @app.route('/add_expense',methods=['GET','POST'])
 def add_expense():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     if request.method == 'POST':
         amount = request.form['amount']
         category=request.form['category']
@@ -309,7 +309,7 @@ def add_expense():
 @app.route('/pomodoro')
 def web_pomodoro():
     if 'email' not in session:
-        return redirect(url_for('web_login'))
+        return redirect(url_for('login_user'))
         
     # We send an HTML page containing JavaScript to handle the countdown countdown
     return '''
@@ -400,7 +400,7 @@ def web_pomodoro():
 @app.route('/attendance_calc',methods=['GET','POST'])
 def attendance_calc():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     if request.method == 'POST':
         lec_attended= request.form['lec_attended']
         total_lec=request.form['total_lec']
@@ -419,7 +419,7 @@ def attendance_calc():
 @app.route('/sgpa_calculator', methods=['GET', 'POST'])
 def web_sgpa_calculator():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
         
     # Dynamically read how many subject rows to display (defaults to 5)
     num_subjects = request.args.get('subjects', default=5, type=int)
@@ -476,10 +476,10 @@ def web_sgpa_calculator():
         </form>
         <br><a href="/dashboard">Back to Dashboard</a>
     '''
-@app.route('/resources')
-def resource():
+@app.route('/web_resources')
+def web_resource():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
 
     resources_=resources()   
     html_output=f"<h1>Resources</h1>"
@@ -494,7 +494,7 @@ def resource():
 @app.route('/tools')
 def tools():
     if 'email' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login_user'))
     return '''
             <h1>Tools Section</h1>
             <p>Here you can access all your tools and resources.</p>
@@ -502,7 +502,7 @@ def tools():
             <a href="/pomodoro">Pomodoro Timer</a><br>
             <a href="/attendance_calc">Attendance Calculator</a><br>
             <a href="/chatbot">Saathi AI</a><br>
-            <a href="/resources">Resources</a><br>
+            <a href="/web_resources">Resources</a><br>
         '''
 
 if __name__ == '__main__':
