@@ -1,9 +1,8 @@
 import sqlite3
 from features.utility import *
 
-def student_Registration():
-    name = input("Enter your name: ")
-    email = input("Enter your email: ")
+def student_Registration(name=None, email=None, password=None, age=None, class_=None, contact_info=None):
+     
     
     # Connect to check if email exists
     conn = sqlite3.connect('student_toolkit.db')
@@ -11,16 +10,12 @@ def student_Registration():
     
     cursor.execute("SELECT email FROM students WHERE email = ?", (email,))
     if cursor.fetchone():
-        print("❌ Email already registered. Please sign in.")
         conn.close()
-        return
-    password = input("Enter your password: ")
+        return False,f"❌ Email already registered. Please sign in."
+
     if not password_checker(password):
-        print("❌ Invalid password. Please try again.")
-        return student_Registration()
-    age = input("Enter your age: ")
-    class_ = input("Enter your class: ")
-    contact_info = input("Enter your mobile no:  ")
+        return False,f"❌ Weak password. Please try again."
+     
     
     cursor.execute('''
         INSERT INTO students (email, name, password, age, class, contact_info) 
@@ -29,12 +24,14 @@ def student_Registration():
     
     conn.commit()
     conn.close()
-    print(f"\n🎉 Student '{name}' registered successfully!")
+    return True,f"\n🎉 Student '{name}' registered successfully!"
 
-def login():
-    email = input("Enter your email: ")
-    password = input("Enter your password: ")
-    
+def login(email=None, password=None):
+    if email is None:
+        return False,f"❌ Email is required for login."
+    if password is None:
+        return False,f"❌ Password is required for login."
+
     conn = sqlite3.connect('student_toolkit.db')
     cursor = conn.cursor()
     
@@ -44,17 +41,11 @@ def login():
     conn.close()
     
     if student:
-        print(f"\n✅ Login successful! Welcome back.")
-        return student,True  
+        return True,student  
     else:
-        print("❌ Invalid email or password.")
-        forgot_password = input("Forgot password? (yes/no): ")
-        if forgot_password.lower() == 'yes':
-            reset_password(email)
-        else:
-            return  None,False
-
-def reset_password(email):
+        return False,f"❌ Invalid email or password."
+ 
+def reset_password(email, contact, new_password):
     conn = sqlite3.connect('student_toolkit.db')
     cursor = conn.cursor()
     
@@ -64,24 +55,20 @@ def reset_password(email):
     
     if result:
         db_contact = result[0]
-        contact = input("Enter your registered mobile number: ")
-        
+         
         if contact != db_contact:
-            print("❌ Incorrect contact information. Password reset failed.")
             conn.close()
-            return 
-            
-        new_password = input("Enter your new password: ")
+            return False,f"❌ Incorrect contact information. Password reset failed."
+
         if not password_checker(new_password):
-            print("❌ Invalid password. Please try again.")
             conn.close()
-            return reset_password(email)
+            return False,f"❌ Weak password. Please try again."
         # Update the password in the database
         cursor.execute("UPDATE students SET password = ? WHERE email = ?", (new_password, email))
         conn.commit()
-        print("✅ Password reset successful.")
+        return True,f"✅ Password reset successful."
     else:
-        print("❌ Email not found. Please register first.")
+        return False,f"❌ Email not found. Please register first."
         
     conn.close()
 
@@ -91,13 +78,10 @@ def profile(email):
     cursor.execute("SELECT * FROM students WHERE email=?", (email,))
     result=cursor.fetchone()
     if result:
-        print(50*"=")
-        print("\t\t-- Student Profile --\n")
-        print(f"Name :  {result[1]}")
-        print(f"Age :  {result[3]}")
-        print(f"Class :  {result[4]}")
-        print(f"Contact Info : { result[5]}")
-        print(50*"=")
+        conn.close()
+        return True,result
     else:
-        print("❌ Profile not found.")
+        conn.close()
+        return False,f"❌ Profile not found."
     conn.close()
+

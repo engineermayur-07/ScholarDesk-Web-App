@@ -1,12 +1,10 @@
 import sqlite3
 from features.utility import *
 
-def add_notes(email):
-    note=input("Enter your note: ")
-    date=input("Enter the date for the note (DD-MM-YYYY): ").strip()
+def add_notes(email,note=None,date=None):
     if not date_checker(date):
-        print("❌ Invalid date format. Please enter the date in DD-MM-YYYY format.")
-        return add_notes(email)
+        return f"❌ Invalid date format. Please enter the date in DD-MM-YYYY format."
+        
     conn=sqlite3.connect("student_toolkit.db")
     cursor=conn.cursor()
     cursor.execute('''
@@ -15,6 +13,7 @@ def add_notes(email):
     print("✅ Note added successfully!")
     conn.commit()
     conn.close()
+    return f"✅ Note added successfully!"
 
 def view_notes(email):
     conn=sqlite3.connect("student_toolkit.db")
@@ -22,36 +21,39 @@ def view_notes(email):
     cursor.execute("SELECT * FROM notes WHERE student_email = ?", (email,))
     notes=cursor.fetchall()
     if notes:
-        print(50*"=")
-        print("\t\t-- Notes --")
-        for note in notes:
-            print(f"Note: {note[2]}, Date: {note[3]}")
-        print(50*"=")
+        conn.close()
+        return notes
+         
     else:
         print("❌ No notes found.")
-    conn.close()
+        conn.commit()
+        conn.close()
+        return f"❌ No notes found."
 
-def delete_notes(email):
+def delete_notes(email,note_id=None):
     conn=sqlite3.connect("student_toolkit.db")
     cursor=conn.cursor()
     cursor.execute("SELECT * FROM notes WHERE student_email = ?", (email,))
     notes=cursor.fetchall()
     if notes:
         print("✅ Notes found!")
-        for note in notes:
-            print(f"ID: {note[0]}, Note: {note[2]}, Date: {note[3]}")
-        note_id=input("Enter the ID of the note you want to delete: ")
+         
         flag=False
         for note in notes:
             if str(note[0])==note_id:
                 flag=True
                 break
         if flag==False:
-            print("❌ Invalid note ID. Please try again.")
-            return delete_notes(email)
+            conn.commit()
+            conn.close()
+            return f"❌ Invalid note ID. Please try again."
         cursor.execute("DELETE FROM notes WHERE id = ? AND student_email = ?", (note_id, email))
+        
         conn.commit()
-        print("✅ Note deleted successfully.")
+        conn.close()
+
+        return f"✅ Note deleted successfully."
     else:
-        print("❌ No notes found.")
-    conn.close() 
+        conn.commit()
+        conn.close()
+        return f"❌ No notes found."
