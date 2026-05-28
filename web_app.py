@@ -263,7 +263,6 @@ def view_incomplete_task():
     html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
     return html_output
 
-
 @app.route('/tools')
 def tools():
     if 'email' not in session:
@@ -277,6 +276,47 @@ def tools():
             <a href="/chatbot">Saathi AI</a><br>
             <a href="/resources">Resources</a><br>
         '''
+
+@app.route('/finance',methods=['GET','POSt'])
+def finance():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    return '''
+            <h1>Expense Tracker</h1>
+            <a href="/view_expense">View Expense Logs </a><br>
+            <a href="/add_expense">Add Expense </a><br>
+           '''
+@app.route('/view_expense',methods=['GET','POST'])
+def view_expense():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    expenses=view_expenses(session['email'])
+    html_output=f"<h1>Your Expense Log</h1>"
+    for expense in expenses:
+        html_output+=f"<h2>ID :{expense[0]}  Amount :{expense[2]}  Category :{expense[3]}  Date :{expense[4]}</h2><hr>"
+    html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
+    return html_output
+@app.route('/add_expense',methods=['GET','POST'])
+def add_expense():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        amount = request.form['amount']
+        category=request.form['category']
+        date = request.form['date']
+        expenses_tracker(session['email'],amount,category,date)
+        return redirect(url_for('view_expense'))
+    
+    return '''
+        <h1>📝 Add an Expense</h1>
+        <form method="post">
+            Amount: <input type="text" name="amount" required><br>
+            Category (Bus,Food,Shopping,etc) : <input type="text" name="category" required><br>
+            Date (DD-MM-YYYY): <input type="text" name="date" required><br>
+            <input type="submit" value="Add Expense">
+        </form>
+        <br><a href='/dashboard'>Back to Dashboard</a>
+    '''    
 
 
 @app.route('/pomodoro')

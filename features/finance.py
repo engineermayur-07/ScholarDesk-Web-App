@@ -3,6 +3,7 @@ from features.utility import *
 
 def expenses_tracker(email,amount=None,category=None,date=None):
     print("\n--- Expenses Tracker ---")
+    amount=float(amount)
     if amount is None:
         return f"❌ Amount cannot be empty. Please try again."
     if category is None:
