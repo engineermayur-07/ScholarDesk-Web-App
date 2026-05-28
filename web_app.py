@@ -11,16 +11,12 @@ from chatbot import *
 app = Flask(__name__)
 app.secret_key = 'super_secret_student_toolkit_key_2026'
 
-# Initialize the database when the web server starts up
 init_db()
 
-# 1. The Home Page Route
 @app.route('/')
 def home():
-    # This renders a visual layout instead of a terminal print string
-    return "<h1>Welcome to the Student Toolkit Web Edition!</h1><a href='/login'>LOGIN</a><br><a href='/register'>REGISTER</a>"
+     return "<h1>Welcome to the Student Toolkit Web Edition!</h1><a href='/login'>LOGIN</a><br><a href='/register'>REGISTER</a>"
 
-# 2. The Login Page Route
 @app.route('/login', methods=['GET', 'POST'])
 def login_user():
     if request.method == 'POST':
@@ -42,8 +38,8 @@ def login_user():
     # If they are just browsing to the page (GET request), show a simple form
     return '''
         <form method="post">
-            Email: <input type="text" name="email"><br>
-            Password: <input type="password" name="password"><br>
+            Email: <input type="text" name="email" required><br>
+            Password: <input type="password" name="password" required><br>
             <input type="submit" value="Login">
         </form>
     '''
@@ -68,12 +64,12 @@ def register_user():
     # If they are just browsing to the page (GET request), show a simple form
     return '''
         <form method="post">
-            Name: <input type="text" name="name"><br>
-            Email: <input type="text" name="email"><br>
-            Password: <input type="password" name="password"><br>
-            Age: <input type="number" name="age"><br>
-            Class: <input type="text" name="class"><br>
-            Contact Info: <input type="text" name="contact_info"><br>
+            Name: <input type="text" name="name" required><br>
+            Email: <input type="text" name="email" required><br>
+            Password: <input type="password" name="password" required><br>
+            Age: <input type="number" name="age" required><br>
+            Class: <input type="text" name="class" required><br>
+            Contact Info: <input type="text" name="contact_info" required><br>
             <input type="submit" value="Register">
         </form>
     '''
@@ -92,9 +88,9 @@ def reset_password_route():
 
     return '''
         <form method="post">
-            Email: <input type="text" name="email"><br>
-            Contact Info: <input type="text" name="contact"><br>
-            New Password: <input type="password" name="new_password"><br>
+            Email: <input type="text" name="email" required><br>
+            Contact Info: <input type="text" name="contact" required><br>
+            New Password: <input type="password" name="new_password" required><br>
             <input type="submit" value="Reset Password">
         </form>
     '''
@@ -156,15 +152,14 @@ def web_add_note():
     if request.method == 'POST':
         note = request.form['note']
         date = request.form['date']
-        # Call your existing backend logic function!
         add_notes(session['email'],note,date)
         return redirect(url_for('web_view_notes'))
     
     return '''
         <h1>📝 Add a New Note</h1>
         <form method="post">
-            Note: <input type="text" name="note"><br>
-            Date (DD-MM-YYYY): <input type="text" name="date"><br>
+            Note: <input type="text" name="note" required><br>
+            Date (DD-MM-YYYY): <input type="text" name="date" required><br>
             <input type="submit" value="Add Note">
         </form>
         <br><a href='/dashboard'>Back to Dashboard</a>
@@ -245,7 +240,6 @@ def tools():
             <a href="/resources">Resources</a><br>
         '''
 
-from flask import Flask, render_template, redirect, url_for, session
 
 @app.route('/pomodoro')
 def web_pomodoro():
@@ -340,5 +334,4 @@ def web_pomodoro():
     '''
 
 if __name__ == '__main__':
-    # Start the web server on your local machine
-    app.run(debug=True)
+     app.run(debug=True)
