@@ -263,19 +263,6 @@ def view_incomplete_task():
     html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
     return html_output
 
-@app.route('/tools')
-def tools():
-    if 'email' not in session:
-        return redirect(url_for('login'))
-    return '''
-            <h1>Tools Section</h1>
-            <p>Here you can access all your tools and resources.</p>
-            <a href="/sgpacalculator">SGPA calculator</a><br>
-            <a href="/pomodoro">Pomodoro Timer</a><br>
-            <a href="/attendance">Attendance Tracker</a><br>
-            <a href="/chatbot">Saathi AI</a><br>
-            <a href="/resources">Resources</a><br>
-        '''
 
 @app.route('/finance',methods=['GET','POSt'])
 def finance():
@@ -410,6 +397,99 @@ def web_pomodoro():
     </body>
     </html>
     '''
+@app.route('/attendance_calc',methods=['GET','POST'])
+def attendance_calc():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        lec_attended= request.form['lec_attended']
+        total_lec=request.form['total_lec']
+        result=attendance_tracker(lec_attended,total_lec)
+        return f"<h2>{result}</h2><br><a href='/dashboard'>Back to Dashboard</a>"
+
+    return '''
+        <h1>📝 Add No. Of Lectures</h1>
+        <form method="post">
+            Lectures Attended : <input type="text" name="lec_attended" required><br>
+            Total Lectures Conducted : <input type="text" name="total_lec" required><br>
+            <input type="submit" value="Calculate">
+        </form>
+        <br><a href='/dashboard'>Back to Dashboard</a>
+    '''    
+@app.route('/sgpa_calculator', methods=['GET', 'POST'])
+def web_sgpa_calculator():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+        
+    # Dynamically read how many subject rows to display (defaults to 5)
+    num_subjects = request.args.get('subjects', default=5, type=int)
+    
+    if request.method == 'POST':
+        try:
+            # 🌟 THE SECRET SAUCE: request.form.getlist() collects all inputs with identical names
+            raw_grades = request.form.getlist('grades')
+            raw_credits = request.form.getlist('credits')
+            
+            # Convert the list of strings sent by the browser into clean lists of integers
+            grades_list = [int(g) for g in raw_grades]
+            credits_list = [int(c) for c in raw_credits]
+            
+            # 🔥 Call your backend function directly!
+            sgpa_result, error_message = calculate_sgpa(grades_list, credits_list)
+            
+            if error_message:
+                return f"<h2>❌ Error: {error_message}</h2><br><a href='/sgpa_calculator'>Try Again</a>"
+                
+            return f'''
+                <h2>📊 SGPA Calculation Complete!</h2>
+                <h3>Your Calculated SGPA is: <b style="color: #2ecc71;">{sgpa_result:.2f}</b></h3>
+                <hr>
+                <a href="/sgpa_calculator">Calculate Another Semester</a> | <a href="/dashboard">Back to Dashboard</a>
+            '''
+        except ValueError:
+            return "<h2>❌ Error: Please ensure all input fields contain valid numbers.</h2><a href='/sgpa_calculator'>Try Again</a>"
+
+    # --- GENERATING THE SINGLE FORM WITH MULTIPLE FIELDS ---
+    input_rows = ""
+    for i in range(num_subjects):
+        input_rows += f'''
+            <div style="margin-bottom: 15px;">
+                <label><b>Subject {i+1}:</b></label> 
+                Grade Point (1-10): <input type="number" name="grades" min="1" max="10" style="width: 60px;" required> 
+                Credits: <input type="number" name="credits" min="1" max="8" style="width: 60px;" required>
+            </div>
+        '''
+        
+    return f'''
+        <h1>📊 SGPA Academic Calculator</h1>
+        <p>Change number of subjects: 
+            <a href="/sgpa_calculator?subjects=3">3</a> | 
+            <a href="/sgpa_calculator?subjects=4">4</a> | 
+            <a href="/sgpa_calculator?subjects=5">5</a> | 
+            <a href="/sgpa_calculator?subjects=6">6</a> | 
+            <a href="/sgpa_calculator?subjects=7">7</a>
+        </p>
+        <hr>
+        <form method="post">
+            {input_rows}
+            <input type="submit" value="Compute SGPA">
+        </form>
+        <br><a href="/dashboard">Back to Dashboard</a>
+    '''
+
+@app.route('/tools')
+def tools():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    return '''
+            <h1>Tools Section</h1>
+            <p>Here you can access all your tools and resources.</p>
+            <a href="/sgpa_calculator">SGPA calculator</a><br>
+            <a href="/pomodoro">Pomodoro Timer</a><br>
+            <a href="/attendance_calc">Attendance Calculator</a><br>
+            <a href="/chatbot">Saathi AI</a><br>
+            <a href="/resources">Resources</a><br>
+        '''
 
 if __name__ == '__main__':
      app.run(debug=True)

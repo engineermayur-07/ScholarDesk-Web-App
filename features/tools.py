@@ -36,6 +36,11 @@ resources_={
 
 def attendance_tracker(lec_attended=None, total_lec=None):
     print("\n--- Attendance Tracker ---")
+    try:
+        lec_attended=int(lec_attended)
+        total_lec=int(total_lec)
+    except ValueError:
+        return f"The lectures must be in integer type"
     if lec_attended is None:
         return f"❌ Number of lectures attended cannot be empty. Please try again."
     if total_lec is None:
