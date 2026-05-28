@@ -47,7 +47,6 @@ def login_user():
             <input type="submit" value="Login">
         </form>
     '''
-
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
     if request.method == 'POST':
@@ -78,7 +77,6 @@ def register_user():
             <input type="submit" value="Register">
         </form>
     '''
-
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_password_route():
     if request.method == 'POST':
@@ -150,7 +148,6 @@ def web_view_notes():
         
     html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
     return html_output
-
 @app.route('/add_note', methods=['GET', 'POST'])
 def web_add_note():
     if 'email' not in session:
@@ -172,6 +169,7 @@ def web_add_note():
         </form>
         <br><a href='/dashboard'>Back to Dashboard</a>
     '''
+
 @app.route('/tasks')
 def tasks():
     if 'email' not in session:
@@ -186,6 +184,21 @@ def tasks():
             <a href="/incomplete_tasks">Incomplete Tasks</a><br>
             <a href="/mark_task">Mark Task as Completed</a><br>
         '''
+@app.route('/view_tasks')
+def view_task():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    tasks = view_tasks(session['email'])
+    html_output= "<h1> Your Tasks</h1><hr>"
+    for task in tasks:
+        html_output+="<h2> ID :{task[0]} Task :{task[2]} Deadline :{task[4]}"
+    html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
+    return html_output
+@app.route('/add_task')
+def add_task():
+    if 'email' not in session:
+        return redirect(url_for('login')) 
+
 
 @app.route('/tools')
 def tools():
