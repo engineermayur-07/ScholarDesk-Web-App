@@ -146,7 +146,7 @@ def web_view_notes():
     html_output = "<h1>📝 Your Saved Notes</h1><hr>"
     for note in notes_data:
         # Assuming note[2] is the Topic and note[3] is the Content
-        html_output += f"<h3>📌 {note} </h3><hr>"
+        html_output += f"<h3>📌 ID : {note[0]}, Note :{note[2]}, DateMentioned :{note[3]} </h3><hr>"
         
     html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
     return html_output
@@ -160,8 +160,8 @@ def web_add_note():
         note = request.form['note']
         date = request.form['date']
         # Call your existing backend logic function!
-        add_notes(session['email'])
-        return redirect(url_for('view_notes'))
+        add_notes(session['email'],note,date)
+        return redirect(url_for('web_view_notes'))
     
     return '''
         <h1>📝 Add a New Note</h1>
