@@ -191,14 +191,45 @@ def view_task():
     tasks = view_tasks(session['email'])
     html_output= "<h1> Your Tasks</h1><hr>"
     for task in tasks:
-        html_output+="<h2> ID :{task[0]} Task :{task[2]} Deadline :{task[4]}"
+        html_output+=f"<h2> ID :{task[0]} Task :{task[2]} Deadline :{task[4]}"
     html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
     return html_output
-@app.route('/add_task')
+@app.route('/add_task',methods=['GET','POST'])
 def add_task():
     if 'email' not in session:
         return redirect(url_for('login')) 
-
+    if request.method == 'POST':
+        task = request.form['task']
+        date = request.form['date']
+        schedule_task(session['email'],task,date)
+        return redirect(url_for('view_task'))
+    
+    return '''
+        <h1>📝 Add a New Task</h1>
+        <form method="post">
+            Task: <input type="text" name="task" required><br>
+            Deadline (DD-MM-YYYY): <input type="text" name="date" required><br>
+            <input type="submit" value="Add Task">
+        </form>
+        <br><a href='/dashboard'>Back to Dashboard</a>
+    '''
+@app.route('/delete_task',methods=['GET','POST'])
+def delete_task():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        task_id = request.form['task_id']
+        delete_tasks(session['email'],task_id)
+        return redirect(url_for('view_task'))
+    
+    return '''
+        <h1>📝 Delete Task</h1>
+        <form method="post">
+            Task ID: <input type="text" name="task_id" required><br>
+            <input type="submit" value="Delete Task">
+        </form>
+        <br><a href='/dashboard'>Back to Dashboard</a>
+    '''
 
 @app.route('/tools')
 def tools():
