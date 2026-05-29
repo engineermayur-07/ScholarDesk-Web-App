@@ -1,7 +1,7 @@
 /* This targets the entire background window */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background : linear-gradient(#da6f2c,#2c3e50);
+    background : linear-gradient(#f4f2f1,#e6e8ea);
     color: #333;
     text-align: center;
     margin-top: 100px;
@@ -292,7 +292,7 @@ a:hover {
 
 /* 🌊 Animated Background Mesh */
 .auth-bg {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #ece8e7, #f0eeef, #d7dadb, #e6eeec);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     margin: 0;
@@ -488,4 +488,1743 @@ a:hover {
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Professional Inline Form Alert Banner Box */
+.alert-box {
+    background-color: #fdf2f2;
+    border: 1px solid #f8b4b4;
+    border-left: 4px solid #e74c3c;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alert-box p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #c0392b;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.alert-box span {
+    font-size: 1.2rem;
+}
+
+/* 📳 Haptic Shake Animation (Runs when wrong password triggers) */
+.animated-shake {
+    animation: hapticShake 0.4s ease-in-out forwards;
+}
+
+@keyframes hapticShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+/* ==========================================================================
+   SCHOLAR DESK PREMIUM LANDING PAGE STYLES
+   ========================================================================== */
+
+.landing-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+}
+
+/* Navigation Bar */
+.landing-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-nav-signin {
+    background: none;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-nav-signin:hover {
+    background: #f1f5f9;
+}
+
+.btn-nav-signup {
+    text-decoration: none;
+    background: #34495e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-nav-signup:hover {
+    background: #2c3e50;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 8%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    min-height: 50vh;
+}
+
+.hero-content {
+    max-width: 550px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    color: #1e293b;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.15rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+.hero-btn-action {
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #23a6d5, #23d5ab);
+    color: white;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(35, 166, 213, 0.3);
+}
+
+.hero-badge {
+    font-size: 5rem;
+    animation: floatAnimation 4s ease-in-out infinite;
+    padding-right: 5%;
+}
+
+/* Features Grid */
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin: 60px 0 20px 0;
+    color: #1e293b;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 8% 80px 8%;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.feature-card h3 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 1.25rem;
+}
+
+.feature-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Footer Section */
+.footer-landing {
+    background: #1e293b;
+    color: #94a3b8;
+    padding: 40px 8%;
+    text-align: center;
+    border-top: 1px solid #334155;
+}
+
+.developer-credit {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    border-top: 1px solid #334155;
+    padding-top: 15px;
+}
+
+.developer-names {
+    font-weight: 600;
+    background: linear-gradient(135deg, #23a6d5, #23d5ab);
+    
+    /* 🚀 THE FIXED GRADIENT CLIP SUITE */
+    -webkit-background-clip: text;
+    background-clip: text; 
+    
+    /* Forces the text color to go transparent so the background gradient shows through */
+    -webkit-text-fill-color: transparent;
+    color: transparent; 
+}
+/* Animations & Responsive Queries */
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 5%;
+    }
+    .hero-badge {
+        display: none;
+    }
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* ==========================================================================
+   PRODUCTION AUTHENTICATION CORE PORTAL STYLES For LOGIN PAGE
+   ========================================================================== */
+
+.auth-bg {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.auth-wrapper {
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.auth-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-brand-icon {
+    font-size: 3rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.auth-header h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.auth-header p {
+    margin: 8px 0 0 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* Form Grouping and Input Layouts */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background-color: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #23a6d5;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(35, 166, 213, 0.15);
+}
+
+/* Custom Styled Checkbox Component */
+.form-utility-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-checkmark {
+    height: 18px;
+    width: 18px;
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 8px;
+    transition: all 0.15s ease;
+}
+
+.checkbox-container:hover input ~ .checkbox-checkmark {
+    background-color: #e2e8f0;
+}
+
+.checkbox-container input:checked ~ .checkbox-checkmark {
+    background-color: #23a6d5;
+    border-color: #23a6d5;
+}
+
+.checkbox-checkmark:after {
+    content: "";
+    display: none;
+    margin-left: 6px;
+    margin-top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkbox-checkmark:after {
+    display: block;
+}
+
+.checkbox-label {
+    font-size: 0.85rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+/* Navigation Links & Action Controls */
+.auth-link-alt {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #23a6d5;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+.auth-link-alt:hover {
+    text-decoration: underline;
+}
+
+.btn-auth-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #23a6d5, #23d5ab);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-auth-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(35, 166, 213, 0.3);
+}
+
+.btn-auth-submit:active {
+    transform: translateY(0);
+}
+
+.btn-arrow {
+    transition: transform 0.2s ease;
+}
+
+.btn-auth-submit:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* Form Footer Control Hub */
+.auth-footer {
+    margin-top: 30px;
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+
+.auth-footer p {
+    margin: 0 0 15px 0;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.auth-link-highlight {
+    color: #23a6d5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link-highlight:hover {
+    text-decoration: underline;
+}
+
+.btn-history-back {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.btn-history-back:hover {
+    color: #475569;
+    text-decoration: underline;
+}
+
+.auth-meta-compliance {
+    margin-top: 20px;
+    font-size: 0.75rem;
+    color: #64748b;
+    letter-spacing: 0.5px;
+}
+
+/* Asynchronous Validation Error Layout Box */
+.alert-box {
+    background-color: #fdf2f2;
+    border: 1px solid #f8b4b4;
+    border-left: 4px solid #e74c3c;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    display: none; /* Controlled via JS Fetch status checks */
+    align-items: center;
+    gap: 12px;
+}
+
+.alert-box p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #c0392b;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.alert-icon {
+    font-size: 1.1rem;
+}
+
+/* Haptic Input Error Shake Keyframes */
+.animated-shake {
+    animation: hapticShake 0.4s ease-in-out forwards;
+}
+
+@keyframes hapticShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+/* ==========================================================================
+   PRODUCTION REGISTRATION PROFILE WRAPPER COMPONENT
+   ========================================================================== */
+
+.register-container {
+    width: 100%;
+    max-width: 680px; /* Widened layout window to accommodate columns */
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.register-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.register-brand-logo {
+    font-size: 3rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.register-header h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.register-header p {
+    margin: 8px 0 0 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* 🚀 Responsive Dual-Column Matrix Grid Configuration */
+.form-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop computers */
+    gap: 12px 20px; /* 12px row spacing, 20px column padding margins */
+    margin-bottom: 20px;
+}
+
+/* Graceful degradation for mobile phone screens */
+@media (max-width: 600px) {
+    .register-container {
+        max-width: 100%;
+    }
+    .register-card {
+        padding: 25px 20px;
+    }
+    .form-grid-layout {
+        grid-template-columns: 1fr; /* Drop into single-row stacks on mobile */
+        gap: 15px 0;
+    }
+}
+
+/* ==========================================================================
+   PRODUCTION WORKSPACE SIDEBAR & DASHBOARD MATRIX
+   ========================================================================== */
+
+.dashboard-body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #0f172a;
+    overflow-x: hidden;
+}
+
+/* Base Responsive Grid Structure */
+.workspace-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+/* Left Lateral Navigation Sidebar Panel */
+.workspace-sidebar {
+    width: 280px;
+    background-color: #0f172a;
+    color: #94a3b8;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #1e293b;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    padding: 25px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.brand-avatar {
+    font-size: 1.8rem;
+}
+
+.brand-text h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.system-badge {
+    font-size: 0.7rem;
+    color: #38bdf8;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-menu {
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    color: #ffffff;
+    background-color: #1e293b;
+}
+
+.menu-item.active {
+    color: #ffffff;
+    background-color: #38bdf8;
+    font-weight: 600;
+}
+
+.menu-item.active .menu-icon {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.highlight-ai {
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.03), transparent);
+}
+
+.highlight-ai:hover {
+    border-color: #38bdf8;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.08), transparent);
+}
+
+.sidebar-footer {
+    padding: 20px 16px;
+    border-top: 1px solid #1e293b;
+}
+
+.btn-sidebar-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.btn-sidebar-logout:hover {
+    background-color: #ef4444;
+    border-color: #ef4444;
+}
+
+/* Main Content Workspace Panel Context */
+.workspace-main {
+    margin-left: 280px; /* Offset spacing equal to Sidebar width */
+    flex-grow: 1;
+    padding: 40px;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 24px;
+}
+
+.header-welcome h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.user-highlight {
+    background: linear-gradient(135deg, #23a6d5, #23d5ab);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-welcome p {
+    margin: 6px 0 0 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-profile-badge {
+    position: relative;
+    cursor: pointer;
+}
+
+.avatar-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+.status-indicator.online {
+    background-color: #10b981;
+}
+
+/* Dashboard Functional Cards Grid Matrix */
+.dashboard-matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.matrix-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.matrix-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.05);
+}
+
+.matrix-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.matrix-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+/* Enterprise Icon Accents */
+.bg-blue { background-color: #e0f2fe; }
+.bg-purple { background-color: #f3e8ff; }
+.bg-emerald { background-color: #d1fae5; }
+.bg-amber { background-color: #fef3c7; }
+.bg-ai { background-color: #e0f2fe; border: 1px solid #38bdf8; }
+
+.matrix-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    background-color: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 99px;
+}
+
+.matrix-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.matrix-card p {
+    margin: 0 0 24px 0;
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.btn-matrix-action {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 16px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+.btn-matrix-action:hover {
+    background-color: #0f172a;
+    border-color: #0f172a;
+    color: #ffffff;
+}
+
+/* Premium AI Mesh Module Layout Variant */
+.featured-ai-card {
+    grid-column: span 1;
+    border-color: #bae6fd;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+.tag-ai {
+    color: #0369a1;
+    background-color: #bae6fd;
+}
+
+.btn-ai-action {
+    background: linear-gradient(135deg, #23a6d5, #23d5ab);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(35, 166, 213, 0.2);
+}
+
+.btn-ai-action:hover {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+}
+
+/* Media Fallback Breakpoint Layout Rules for Tablets & Mobile Screens */
+@media (max-width: 1024px) {
+    .workspace-layout { flex-direction: column; }
+    .workspace-sidebar { width: 100vw; height: auto; position: relative; }
+    .sidebar-menu { flex-direction: row; overflow-x: auto; padding: 12px; }
+    .workspace-main { margin-left: 0; padding: 24px; }
+    .sidebar-footer { display: none; }
+}
+
+/* ==========================================================================
+   PRODUCTION STUDENT NOTES HUB DASHBOARD MODULE
+   ========================================================================== */
+
+/* Adaptive Filter Badges */
+.header-quick-filters {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-filter-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    transition: all 0.2s ease;
+}
+
+.btn-filter-tab:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    color: #0f172a;
+}
+
+.dot-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-complete .dot-indicator { background-color: #10b981; }
+.status-pending .dot-indicator { background-color: #f59e0b; }
+
+/* Submenu/Utility Control Bar */
+.notes-utility-bar {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 14px 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* 🚀 Premium Row-Based Interactive Notes Action Cards */
+.notes-action-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    grid-column: span 1;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+}
+
+.notes-action-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+    border-color: #cbd5e1;
+}
+
+/* Color Palette Left-Border Highlights */
+.notes-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.border-blue { background-color: #38bdf8; }
+.border-emerald { background-color: #34d399; }
+.border-amber { background-color: #fbbf24; }
+.border-red { background-color: #f87171; }
+
+.notes-card-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding-right: 20px;
+}
+
+.notes-icon-wrapper {
+    font-size: 1.5rem;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Soft palette adjustments (Looks incredible on both dark and light system profiles) */
+.text-blue { background-color: #f0f9ff; color: #0369a1; }
+.text-emerald { background-color: #ecfdf5; color: #047857; }
+.text-amber { background-color: #fffbeb; color: #b45309; }
+.text-red { background-color: #fef2f2; color: #b91c1c; }
+
+.notes-card-content h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.15rem;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.notes-card-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.notes-action-arrow {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    font-weight: bold;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.notes-action-card:hover .notes-action-arrow {
+    transform: translateX(3px);
+    color: #0f172a;
+}
+
+/* Adaptive Breakdown Fallback for Smaller Hardware Forms */
+@media (max-width: 768px) {
+    .main-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .notes-action-card { padding: 20px; }
+    .notes-card-body { gap: 14px; }
+}
+
+/* ==========================================================================
+   PRODUCTION STUDENT TASK HUB ACCENTS & THEME CONFIG
+   ========================================================================== */
+
+/* Task Specific Indigo Border Highlighting Accent */
+.border-indigo {
+    background-color: #6366f1;
+}
+
+/* Luxury Soft Indigo Card Branding Vector */
+.text-indigo {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+/* Quick hover feedback enhancement for row-actions */
+.notes-action-card:hover .text-indigo {
+    background-color: #4338ca;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+/* ==========================================================================
+   PRODUCTION STUDENT FINANCIAL HUB INTERFACE LAYOUT
+   ========================================================================== */
+
+/* Left Geometric Accent Border Blocks */
+.border-amber-gold {
+    background-color: #d97706; /* Solid Amber */
+}
+
+.border-rose-mint {
+    background-color: #10b981; /* Premium Emerald Accent */
+}
+
+/* Luxury Financial Alpha Opacity Colors (Optimal Readability Suite) */
+.text-amber-gold {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.text-rose-mint {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+/* Micro-interaction Hover Effects */
+.notes-action-card:hover .text-amber-gold {
+    background-color: #92400e;
+    color: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notes-action-card:hover .text-rose-mint {
+    background-color: #065f46;
+    color: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   PRODUCTION ACADEMIC UTILITIES MODULE ACCENTS
+   ========================================================================== */
+
+/* Left Color Bar Highlighting Elements */
+.border-cyan { background-color: #06b6d4; }
+.border-orange-timer { background-color: #f97316; }
+.border-emerald-auditor { background-color: #10b981; }
+.border-crimson { background-color: #f43f5e; }
+
+/* Premium Alpha-Tint Icon Vector Brackets */
+.text-cyan {
+    background-color: #ecfeff;
+    color: #0891b2;
+}
+
+.text-orange-timer {
+    background-color: #fff7ed;
+    color: #ea580c;
+}
+
+.text-emerald-auditor {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+
+.text-crimson {
+    background-color: #fff1f2;
+    color: #e11d48;
+}
+
+/* Micro-Interaction Scale Accelerators */
+.notes-action-card:hover .text-cyan { background-color: #0891b2; color: #ffffff; }
+.notes-action-card:hover .text-orange-timer { background-color: #ea580c; color: #ffffff; }
+.notes-action-card:hover .text-emerald-auditor { background-color: #059669; color: #ffffff; }
+.notes-action-card:hover .text-crimson { background-color: #e11d48; color: #ffffff; }
+
+/* ==========================================================================
+   ENTERPRISE FINANCIAL LEDGER DATA SHEETS & FORMS
+   ========================================================================== */
+
+/* Empty Database Board Panel */
+.empty-state-panel {
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 60px 40px;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.empty-state-icon {
+    font-size: 3.5rem;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.empty-state-panel h2 {
+    margin: 0 0 10px 0;
+    color: #0f172a;
+    font-size: 1.5rem;
+}
+
+.empty-state-panel p {
+    margin: 0 0 30px 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Operational Banking Action Buttons */
+.btn-ledger-primary {
+    display: inline-block;
+    text-align: center;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-ledger-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+.btn-ledger-secondary {
+    display: inline-block;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.btn-ledger-secondary:hover {
+    color: #0f172a;
+    text-decoration: underline;
+}
+
+/* Master Data Grid Table Wrap */
+.table-card-wrapper {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.enterprise-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.enterprise-data-table th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.enterprise-data-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+}
+
+.enterprise-data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.enterprise-data-table tbody tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* Micro Typography Metrics */
+.ledger-id-hash {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.ledger-val-negative {
+    font-weight: 700;
+    color: #ef4444 !important; /* Bold Financial Red Debit Notation */
+}
+
+.ledger-category-badge {
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
+}
+
+.ledger-date-stamp {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Form Input Card Modules */
+.ledger-form-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.ledger-form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.ledger-form-header h2 {
+    margin: 0 0 8px 0;
+    color: #0f172a;
+    font-size: 1.5rem;
+}
+
+.ledger-form-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+.btn-ledger-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    transition: all 0.15s ease;
+}
+
+.btn-ledger-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+.ledger-form-footer {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+/* Native Calendar Input Selection Override Styling */
+input[type="date"] {
+    font-family: inherit;
+}
+
+/* ==========================================================================
+   PRODUCTION CORE ACADEMIC UTILITY PANELS (Decoupled Layout Styles)
+   ========================================================================== */
+
+/* Universal Tool Flex Cards Container */
+.tool-workspace-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+.text-center { text-align: center; }
+
+/* 🍅 Pomodoro Clock Interface Components */
+.pomodoro-status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #ffe4e6;
+    color: #b91c1c;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 99px;
+    margin-top: 10px;
+    transition: all 0.25s ease;
+}
+
+.pomodoro-timer-digits {
+    font-family: monospace;
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 30px 0;
+    letter-spacing: -1px;
+}
+
+.btn-tool-action {
+    padding: 14px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
+    transition: all 0.15s ease;
+}
+
+.btn-tool-action:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(234, 88, 12, 0.35);
+}
+
+/* Dynamic Mathematical Calculation Output Layout Boxes */
+.tool-result-panel {
+    background-color: #f8fafc;
+    padding: 24px;
+    border-radius: 10px;
+    margin: 24px 0;
+    border-left: 4px solid #cbd5e1;
+    text-align: left;
+}
+
+/* 📈 SGPA Grid Form Components */
+.sgpa-pills-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 30px;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.sgpa-nav-pill {
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.sgpa-nav-pill:hover {
+    border-color: #cbd5e1;
+}
+
+.sgpa-table-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-label-group {
+    display: flex;
+    gap: 20px;
+    width: 240px;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.header-label-group span { width: 110px; text-align: center; }
+
+.sgpa-fields-scroll-zone {
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.sgpa-input-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.course-row-index {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.sgpa-fields-wrap {
+    display: flex;
+    gap: 20px;
+}
+
+.sgpa-mini-input {
+    width: 110px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.95rem;
+    background: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.sgpa-mini-input:focus {
+    outline: none;
+    border-color: #06b6d4;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+}
+
+.sgpa-display-panel {
+    background-color: #ecfeff;
+    padding: 24px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 1px dashed #06b6d4;
+}
+
+/* 📚 Resource Folder Grid Components */
+.resource-library-masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+}
+
+.resource-folder-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.01);
+}
+
+.resource-folder-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 12px;
+}
+
+.folder-icon { font-size: 1.4rem; }
+
+.resource-folder-header h3 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.resource-folder-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resource-item-row {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+.resource-item-row:hover {
+    background: #f0fdfa;
+    border-color: #99f6e4;
+}
+
+.resource-item-meta h4 {
+    margin: 4px 0 0 0;
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.resource-topic-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-resource-launch {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0d9488;
+    white-space: nowrap;
+}
+
+.btn-resource-launch:hover {
+    text-decoration: underline;
+    color: #0f172a;
+}
+
+/* ==========================================================================
+   PRODUCTION SCHEDULE REGISTRY & COMPLIANCE STATS
+   ========================================================================== */
+
+/* Task Items Row Grid Wrapper */
+.task-list-wrapper-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.task-registry-row {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.01);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.task-registry-row:hover {
+    transform: translateX(3px);
+    border-color: #cbd5e1;
+    background-color: #f8fafc;
+}
+
+.task-left-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.task-hash-badge {
+    font-family: monospace;
+    font-weight: 700;
+    color: #94a3b8;
+    background-color: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.task-desc-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.task-deadline-pill {
+    background-color: #e0e7ff;
+    color: #4338ca;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: 1px solid #c7d2fe;
+}
+
+/* History Resolved Table Formatting Text */
+.task-resolved-line-text {
+    font-weight: 500;
+    color: #94a3b8;
+    text-decoration: line-through; /* Professional strikethrough configuration */
+}
+
+.task-status-badge-complete {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Backlogs Table Formatting Text */
+.task-pending-heavy-text {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.task-status-badge-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-block;
+    text-align: center;
 }

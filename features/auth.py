@@ -43,7 +43,7 @@ def login(email=None, password=None):
     if student:
         return True,student  
     else:
-        return False,f"❌ Invalid email or password."
+        return False,None
  
 def reset_password(email, contact, new_password):
     conn = sqlite3.connect('student_toolkit.db')
