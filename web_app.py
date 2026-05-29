@@ -914,20 +914,23 @@ def notes():
     '''
 @app.route('/view_notes')
 def web_view_notes():
-    # Security checkpoint gate
+    # 1. Security Access Gate
     if 'email' not in session or not session['email']:
         return redirect(url_for('login_user'))
         
     notes_data = view_notes(session['email'])
     
-    # Unified Structural Sidebar Block
+    # Define User Avatar Initial for global navigation layout consistency
+    student_initial = session.get("name", "S")[0].upper()
+    
+    # Unified Lateral Navigation Sidebar
     sidebar_html = f'''
     <aside class="workspace-sidebar">
         <div class="sidebar-brand">
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">for student by student</span>
+                <span class="system-badge">v2.4 Core</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -944,7 +947,7 @@ def web_view_notes():
     </aside>
     '''
 
-    # SCENARIO A: PERSONAL STUDY BINDER IS COMPLETELY VACANT
+    # SCENARIO A: BINDER IS EMPTY (Returns HTML response directly)
     if not notes_data:
         return f'''
         <!DOCTYPE html>
@@ -960,7 +963,7 @@ def web_view_notes():
                     <div class="empty-state-panel" style="max-width: 540px; padding: 50px;">
                         <span class="empty-state-icon">📝</span>
                         <h2>Notebook Repository Vacant</h2>
-                        <p>Your institutional cloud binder has no saved notes recorded under this profile yet. Log summaries, structural equations, or test concepts cleanly.</p>
+                        <p>Your institutional cloud binder has no saved notes recorded under this profile yet.</p>
                         <a href="/add_note" class="btn-ledger-primary" style="background: linear-gradient(135deg, #23a6d5, #23d5ab); box-shadow: 0 4px 12px rgba(35,166,213,0.2);">✍️ Create First Note Entry</a>
                     </div>
                 </main>
@@ -969,7 +972,7 @@ def web_view_notes():
         </html>
         '''
 
-    # SCENARIO B: COMPILED DATABASE DATA LOCATED
+    # SCENARIO B: DATA FOUND -> BUILD FULL CONSOLE STRING
     table_rows = ""
     for note in notes_data:
         table_rows += f'''
@@ -980,7 +983,7 @@ def web_view_notes():
         </tr>
         '''
 
-    return f'''
+    html_output = f'''
     <!DOCTYPE html>
     <html>
     <head>
@@ -1002,7 +1005,6 @@ def web_view_notes():
                     </div>
                 </header>
 
-                <!-- Expanded Production Level Table Block Wrapper -->
                 <div class="table-card-wrapper">
                     <table class="enterprise-data-table">
                         <thead>
@@ -1026,8 +1028,11 @@ def web_view_notes():
     </body>
     </html>
     '''
-
-
+    
+    # 🚀 CRITICAL FIX: Ensure this return statement is completely un-indented 
+    # to the main level of the function block so it always handles Scenario B!
+    return html_output        
+    # Rest of your html output code remains exactly the same...
 @app.route('/add_note', methods=['GET', 'POST'])
 def web_add_note():
     if 'email' not in session or not session['email']:

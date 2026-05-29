@@ -29,7 +29,7 @@ def view_tasks(email):
          conn.close()
          return tasks
     conn.close()
-    return f"❌ No tasks found."
+    return []
 
 def delete_tasks(email, task_id=None):
     conn=sqlite3.connect("student_toolkit.db")
@@ -81,7 +81,7 @@ def Completed_tasks(email, task_id=None):
     else:
         conn.commit()
         conn.close()
-        return f"❌ No tasks found."
+        return []
  
 def view_completed_tasks(email) :
     conn=sqlite3.connect("student_toolkit.db")
@@ -95,7 +95,7 @@ def view_completed_tasks(email) :
     else:
         conn.commit()
         conn.close()
-        return f"❌ No completed tasks found."
+        return []
  
 def view_incomplete_tasks(email):
     conn=sqlite3.connect('student_toolkit.db')
@@ -109,5 +109,5 @@ def view_incomplete_tasks(email):
     else:
         conn.commit()
         conn.close()
-        return f"❌ No incomplete tasks found."
+        return  []
      

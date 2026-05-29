@@ -18,7 +18,16 @@ def init_db():
         )
     ''')
 
-  
+    #Notes Table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            student_email TEXT,
+            note TEXT,
+            date TEXT,
+            FOREIGN KEY (student_email) REFERENCES students (email)
+        )
+    ''')
     #Tasks Table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS tasks (

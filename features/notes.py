@@ -28,7 +28,7 @@ def view_notes(email):
         print("❌ No notes found.")
         conn.commit()
         conn.close()
-        return f"❌ No notes found."
+        return []
 
 def delete_notes(email,note_id=None):
     conn=sqlite3.connect("student_toolkit.db")
