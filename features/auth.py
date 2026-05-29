@@ -15,10 +15,16 @@ def student_Registration(name=None, email=None, password=None, age=None, class_=
     cursor.execute("SELECT email FROM students WHERE email = ?", (email,))
     if cursor.fetchone():
         conn.close()
-        return False,f"❌ Email already registered. Please sign in."
+        return False,f"Email already registered. Please sign in."
 
+    if email is None:
+        return False,f"Email is required for registration."
+    
+    if not validate_email(email):
+        return False,f"Invalid email format. Please try again."
+    
     if not password_checker(password):
-        return False,f"❌ Weak password. Please try again."
+        return False,f"Weak password. Please try again."
      
     
     cursor.execute('''
@@ -28,13 +34,13 @@ def student_Registration(name=None, email=None, password=None, age=None, class_=
     
     conn.commit()
     conn.close()
-    return True,f"\n🎉 Student '{name}' registered successfully!"
+    return True,f"\nStudent '{name}' registered successfully!"
 
 def login(email=None, password=None):
     if email is None:
-        return False,f"❌ Email is required for login."
+        return False,f"Email is required for login."
     if password is None:
-        return False,f"❌ Password is required for login."
+        return False,f"Password is required for login."
 
     conn = sqlite3.connect('student_toolkit.db')
     cursor = conn.cursor()
@@ -47,7 +53,7 @@ def login(email=None, password=None):
     if student:
         return True,student  
     else:
-        return False,f"❌ Invalid email or password."
+        return False,f"Invalid email or password."
  
 def reset_password(email, contact, new_password):
     conn = sqlite3.connect('student_toolkit.db')
@@ -62,17 +68,17 @@ def reset_password(email, contact, new_password):
          
         if contact != db_contact:
             conn.close()
-            return False,f"❌ Incorrect contact information. Password reset failed."
+            return False,f"Incorrect contact information. Password reset failed."
 
         if not password_checker(new_password):
             conn.close()
-            return False,f"❌ Weak password. Please try again."
+            return False,f"Weak password. Please try again."
         # Update the password in the database
         cursor.execute("UPDATE students SET password = ? WHERE email = ?", (new_password, email))
         conn.commit()
         return True,f"Password reset successful."
     else:
-        return False,f"❌ Email not found. Please register first."
+        return False,f"Email not found. Please register first."
         
     conn.close()
 
@@ -86,6 +92,6 @@ def profile(email):
         return True,result
     else:
         conn.close()
-        return False,f"❌ Profile not found."
+        return False,f"Profile not found."
     conn.close()
 

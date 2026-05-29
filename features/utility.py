@@ -21,12 +21,23 @@ def date_checker(date):
 
 def password_checker(password):
     if len(password) < 8:
-        print("❌ Password must be at least 8 characters long.")
+        print("Password must be at least 8 characters long.")
         return False
     if not any(char.isdigit() for char in password):
-        print("❌ Password must contain at least one digit.")
+        print("Password must contain at least one digit.")
         return False
     if not any(char.isalpha() for char in password):
-        print("❌ Password must contain at least one letter.")
+        print("Password must contain at least one letter.")
+        return False
+    if not any(char.isupper() for char in password):
+        print("Password must contain at least one uppercase letter.")
+        return False
+    if not any(char.islower() for char in password):
+        print("Password must contain at least one lowercase letter.")
         return False
     return True
+
+def validate_email(email):
+    import re
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return bool(re.match(pattern, email))

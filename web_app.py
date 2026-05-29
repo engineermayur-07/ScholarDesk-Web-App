@@ -128,6 +128,8 @@ def tasks():
     tasks_data = view_tasks(session['email'])
     tasks_list = tasks_data if isinstance(tasks_data, list) else []
     return render_template('tasks.html', tasks=tasks_list, name=session.get('name', 'Student'))
+
+
 @app.route('/view_tasks')
 def view_task():
     if 'email' not in session:
@@ -143,6 +145,8 @@ def view_task():
 
     html_output += "<br><a href='/dashboard'>Back to Dashboard</a>"
     return html_output
+
+
 @app.route('/add_task', methods=['GET', 'POST'])
 def add_task():
     if 'email' not in session:
