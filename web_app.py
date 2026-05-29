@@ -2480,7 +2480,249 @@ def web_sgpa_calculator():
     </html>
     '''
 
+@app.route('/chatbot', methods=['GET', 'POST'])
+def chatbot_user():
+    # Security checkpoint gate
+    if 'email' not in session or not session['email']:
+        return redirect(url_for('login_user'))
 
+    # Initialize a clean session chat memory thread if it doesn't exist yet
+    if 'saathi_chat_history' not in session:
+        session['saathi_chat_history'] = []
+
+    if request.method == 'POST':
+        user_message = request.form.get('message', '').strip()
+        
+        if not user_message:
+            return {"status": "error", "message": "Prompt message context cannot be empty."}
+            
+        # Clear/Reset keyword signals to wipe conversation memory stack
+        if user_message.lower() in ["exit", "quit", "stop", "clear"]:
+            session['saathi_chat_history'] = []
+            return {
+                "status": "success", 
+                "response": "### 🧼 Session Reset Complete\nI have cleanly cleared our chat history ledger cache. What brand new academic topic are we exploring next?"
+            }
+
+        try:
+            # 1. Fetch running background history list from cookie cache
+            history = session['saathi_chat_history']
+            
+            # 2. Generate the AI text stream output using your SDK module
+            ai_reply_text = generate_saathi_response(history, user_message)
+            
+            # 3. Securely append both turns into memory to preserve context tracking
+            history.append({"role": "user", "text": user_message})
+            history.append({"role": "model", "text": ai_reply_text})
+            
+            # Save state changes explicitly back to the session cookie container
+            session['saathi_chat_history'] = history
+            session.modified = True
+            
+            return {"status": "success", "response": ai_reply_text}
+            
+        except Exception as e:
+            return {"status": "error", "message": f"Core Neural connection disruption: {str(e)}"}
+
+    # Define User Avatar Initial for header rendering
+    student_initial = session.get("name", "S")[0].upper()
+
+    # Left Sidebar Navigation Block Component
+    sidebar_html = f'''
+    <aside class="workspace-sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-avatar">🎓</span>
+            <div class="brand-text">
+                <h3>Scholar Desk</h3>
+                <span class="system-badge">v2.4 Core</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="/dashboard" class="menu-item"><span class="menu-icon">🎛️</span> Workspace Home</a>
+            <a href="/notes" class="menu-item"><span class="menu-icon">📝</span> Notes Engine</a>
+            <a href="/tasks" class="menu-item"><span class="menu-icon">📅</span> Task Manager</a>
+            <a href="/tools" class="menu-item"><span class="menu-icon">📊</span> Academic Tools</a>
+            <a href="/finance" class="menu-item"><span class="menu-icon">💳</span> Expense Tracker</a>
+            <a href="/chatbot" class="menu-item active highlight-ai"><span class="menu-icon">🤖</span> Saathi AI Assistant</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="btn-sidebar-logout"><span>🔒 Terminate Session</span></a>
+        </div>
+    </aside>
+    '''
+
+    # Build history elements row sets dynamically if a student refreshes their active page
+    historic_messages_html = ""
+    for msg in session['saathi_chat_history']:
+        if msg['role'] == 'user':
+            historic_messages_html += f'''
+            <div class="msg-row row-user">
+                <div class="msg-bubble bubble-user"><span class="msg-sender-name">You</span><p>{msg['text']}</p></div>
+                <div class="msg-avatar-user">{student_initial}</div>
+            </div>
+            '''
+        else:
+            historic_messages_html += f'''
+            <div class="msg-row row-ai">
+                <div class="msg-avatar">🤖</div>
+                <div class="msg-bubble bubble-ai"><span class="msg-sender-name">Saathi AI</span><p>{msg['text']}</p></div>
+            </div>
+            '''
+
+    return f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Saathi AI Workspace | Scholar Desk</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body class="dashboard-body">
+        <div class="workspace-layout">
+            {sidebar_html}
+            
+            <main class="workspace-main" style="padding: 0; display: flex; flex-direction: column; height: 100vh;">
+                
+                <header class="chat-header-bar">
+                    <div class="chat-header-meta">
+                        <h2>🤖 Saathi AI Workspace</h2>
+                        <p><span class="status-dot-green"></span> Gemini 2.5 Flash Core Synchronized</p>
+                    </div>
+                    <a href="/profile" class="header-profile-link" style="text-decoration: none;">
+                        <div class="header-profile-badge">
+                            <div class="avatar-circle">{student_initial}</div>
+                        </div>
+                    </a>
+                </header>
+
+                <div class="chat-message-stream" id="chatStream">
+                    
+                    <div class="msg-row row-ai">
+                        <div class="msg-avatar">🤖</div>
+                        <div class="msg-bubble bubble-ai">
+                            <span class="msg-sender-name">Saathi AI</span>
+                            <p>Greetings! I am your advanced academic workspace companion shell. Developed by Mayur B. Gund and Arjun B. Kadam, my neural weights are ready to process curriculum context. Ask me anything or type <b>'clear'</b> to flush our session history stack.</p>
+                        </div>
+                    </div>
+
+                    {historic_messages_html}
+                </div>
+
+                <footer class="chat-input-dock">
+                    <form id="chatForm" class="chat-form-layout">
+                        <input type="text" id="userInput" name="message" placeholder="Ask Saathi anything... (e.g., Explain standard normal distribution properties)" required autocomplete="off">
+                        <button type="submit" id="sendBtn">
+                            <span>Submit Prompt</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                    <p class="chat-compliance-subtext">Scholar Desk Cognitive Computing Unit. Responses format explicitly inside academic sub-sections.</p>
+                </footer>
+                
+            </main>
+        </div>
+
+        <script>
+            const chatForm = document.getElementById('chatForm');
+            const userInput = document.getElementById('userInput');
+            const chatStream = document.getElementById('chatStream');
+            const sendBtn = document.getElementById('sendBtn');
+
+            function scrollToBottom() {{
+                chatStream.scrollTop = chatStream.scrollHeight;
+            }}
+            
+            // Execute on initial layout compilation
+            scrollToBottom();
+
+            chatForm.addEventListener('submit', async function(e) {{
+                e.preventDefault();
+                
+                const messageText = userInput.value.trim();
+                if (!messageText) return;
+
+                // Render User Question Row
+                const userRow = document.createElement('div');
+                userRow.className = 'msg-row row-user';
+                userRow.innerHTML = `
+                    <div class="msg-bubble bubble-user">
+                        <span class="msg-sender-name">You</span>
+                        <p>${{messageText}}</p>
+                    </div>
+                    <div class="msg-avatar-user">{student_initial}</div>
+                `;
+                chatStream.appendChild(userRow);
+                userInput.value = '';
+                scrollToBottom();
+
+                // Append Pulsing Typing Placeholder
+                const loadingRow = document.createElement('div');
+                loadingRow.className = 'msg-row row-ai';
+                loadingRow.id = 'saathiLoading';
+                loadingRow.innerHTML = `
+                    <div class="msg-avatar">🤖</div>
+                    <div class="msg-bubble bubble-ai text-loading-dim">
+                        <span class="msg-sender-name">Saathi AI</span>
+                        <p class="typing-indicator-dots"><span>.</span><span>.</span><span>.</span> Compiling structural context variables</p>
+                    </div>
+                `;
+                chatStream.appendChild(loadingRow);
+                scrollToBottom();
+
+                sendBtn.disabled = true;
+
+                try {{
+                    const formData = new FormData();
+                    formData.append('message', messageText);
+
+                    const response = await fetch('/chatbot', {{
+                        method: 'POST',
+                        body: formData
+                    }});
+                    
+                    const data = await response.json();
+                    document.getElementById('saathiLoading').remove();
+
+                    if (data.status === 'success') {{
+                        const aiRow = document.createElement('div');
+                        aiRow.className = 'msg-row row-ai';
+                        
+                        // Parse simple line breaks automatically for smooth reading
+                        const cleanOutput = data.response.replace(/\\n/g, '<br>');
+                        
+                        aiRow.innerHTML = `
+                            <div class="msg-avatar">🤖</div>
+                            <div class="msg-bubble bubble-ai">
+                                <span class="msg-sender-name">Saathi AI</span>
+                                <div>${{cleanOutput}}</div>
+                            </div>
+                        `;
+                        chatStream.appendChild(aiRow);
+                    }} else {{
+                        const errorRow = document.createElement('div');
+                        errorRow.className = 'msg-row row-ai';
+                        errorRow.innerHTML = `
+                            <div class="msg-avatar">⚠️</div>
+                            <div class="msg-bubble bubble-ai" style="border-left:3px solid #ef4444; background:#fdf2f2;">
+                                <span class="msg-sender-name" style="color:#b91c1c;">System Error</span>
+                                <p style="color:#c0392b;">${{data.message}}</p>
+                            </div>
+                        `;
+                        chatStream.appendChild(errorRow);
+                    }}
+                }} catch (err) {{
+                    if(document.getElementById('saathiLoading')) {{
+                        document.getElementById('saathiLoading').remove();
+                    }}
+                    console.error(err);
+                }} finally {{
+                    sendBtn.disabled = false;
+                    scrollToBottom();
+                }}
+            }});
+        </script>
+    </body>
+    </html>
+    '''
 @app.route('/web_resources')
 def web_resource():
     if 'email' not in session or not session['email']:
