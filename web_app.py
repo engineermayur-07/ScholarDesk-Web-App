@@ -115,7 +115,155 @@ def home():
     </body>
     </html>
     '''
+@app.route('/profile')
+def view_profile():
+    # Security checkpoint gate
+    if 'email' not in session or not session['email']:
+        return redirect(url_for('login_user'))
+        
+    # Execute your backend SQLite fetching function
+    is_valid, profile_data = profile(session['email'])
+    
+    # Unified Structural Sidebar Block (Matches Master Dashboard Layout)
+    sidebar_html = f'''
+    <aside class="workspace-sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-avatar">🎓</span>
+            <div class="brand-text">
+                <h3>Scholar Desk</h3>
+                <span class="system-badge">for student by student</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="/dashboard" class="menu-item"><span class="menu-icon">🎛️</span> Workspace Home</a>
+            <a href="/notes" class="menu-item"><span class="menu-icon">📝</span> Notes Engine</a>
+            <a href="/tasks" class="menu-item"><span class="menu-icon">📅</span> Task Manager</a>
+            <a href="/tools" class="menu-item"><span class="menu-icon">📊</span> Academic Tools</a>
+            <a href="/finance" class="menu-item"><span class="menu-icon">💳</span> Expense Tracker</a>
+            <a href="/chatbot" class="menu-item highlight-ai"><span class="menu-icon">🤖</span> Saathi AI Assistant</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="btn-sidebar-logout"><span>🔒 Terminate Session</span></a>
+        </div>
+    </aside>
+    '''
 
+    # EXCEPTION FALLBACK SCREEN: Profile check returns False
+    if not is_valid:
+        return f'''
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Account Error | Scholar Desk</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body class="dashboard-body">
+            <div class="workspace-layout">
+                {sidebar_html}
+                <main class="workspace-main" style="display: flex; align-items: center; justify-content: center;">
+                    <div class="empty-state-panel" style="border-top: 4px solid #ef4444;">
+                        <span class="empty-state-icon">⚠️</span>
+                        <h2>Profile Sync Failure</h2>
+                        <p>{profile_data}</p>
+                        <a href="/dashboard" class="btn-ledger-secondary">← Return to Main Workspace</a>
+                    </div>
+                </main>
+            </div>
+        </body>
+        </html>
+        '''
+
+    # Assuming database schema index structure: 
+    # profile_data[0] = Name, profile_data[1] = Email, profile_data[2] = Password, 
+    # profile_data[3] = Age, profile_data[4] = Class/Batch, profile_data[5] = Contact Info
+    student_name = profile_data[0]
+    student_email = profile_data[1]
+    student_key_initial = student_name[0].upper() if student_name else "S"
+    student_age = profile_data[3]
+    student_batch = profile_data[4]
+    student_contact = profile_data[5]
+
+    return f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title> Profile | Scholar Desk</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body class="dashboard-body">
+        <div class="workspace-layout">
+            {sidebar_html}
+            
+            <main class="workspace-main">
+                <header class="main-header">
+                    <div class="header-welcome">
+                        <h1>👤 Scholar Desk Profile Workspace</h1>
+                        <p>Manage your account settings, workspace credentials, and active data parameters</p>
+                    </div>
+                </header>
+
+                <div class="profile-layout-container">
+                    
+                    <div class="profile-badge-card">
+                        <div class="profile-avatar-giant">{student_key_initial}</div>
+                        <h3>{student_name}</h3>
+                        <span class="profile-role-tag">Verified Workspace Student</span>
+                        <div class="profile-badge-footer">
+                            <p>System Security: <b>Active</b></p>
+                            <p>Terminal Status: <span class="status-dot-green"></span> Online</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-data-matrix-card">
+                        <div class="matrix-card-section-header">
+                            <h3>📋 Institutional Credentials & Core Registry</h3>
+                        </div>
+                        
+                        <div class="profile-meta-grid">
+                            
+                            <div class="meta-item">
+                                <span class="meta-label">Full Account Name</span>
+                                <div class="meta-value-display">{student_name}</div>
+                            </div>
+
+                            <div class="meta-item">
+                                <span class="meta-label">Registered Institutional Email</span>
+                                <div class="meta-value-display">{student_email}</div>
+                            </div>
+
+                            <div class="meta-item">
+                                <span class="meta-label">Class / Academic Division Batch</span>
+                                <div class="meta-value-display">{student_batch}</div>
+                            </div>
+
+                            <div class="meta-item">
+                                <span class="meta-label">Verified Contact Number</span>
+                                <div class="meta-value-display">{student_contact}</div>
+                            </div>
+
+                            <div class="meta-item" style="grid-column: span 1;">
+                                <span class="meta-label">Age Metric</span>
+                                <div class="meta-value-display">{student_age} Years Old</div>
+                            </div>
+
+                            <div class="meta-item" style="grid-column: span 1;">
+                                <span class="meta-label">Security Protocol</span>
+                                <div class="meta-value-display" style="color: #10b981; font-weight: 700;">✓ Encrypted Session</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <a href="/dashboard" class="btn-ledger-secondary">← Back to Main Command Center Dashboard</a>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>
+    '''
 @app.route('/login', methods=['GET', 'POST'])
 def login_user():
     # 🧼 AUTOMATIC SESSION KILLER: Wipes session if user manually returns here via GET
@@ -501,7 +649,7 @@ def dashboard():
     # Security Guardrail Check
     if 'email' not in session or not session['email']:
         return redirect(url_for('login_user'))
-        
+    student_initial = session.get("name", "S")[0].upper()    
     # --- GET REQUEST: RENDER ENTERPRISE WORKSPACE ---
     return f'''
     <!DOCTYPE html>
@@ -566,10 +714,12 @@ def dashboard():
                         <h1>Welcome Back, <span class="user-highlight">{session.get("name", "Scholar")}</span></h1>
                         <p>Academic Hub Command Center Terminal</p>
                     </div>
-                    <div class="header-profile-badge">
-                        <div class="avatar-circle">{session.get("name", "S")[0].upper()}</div>
-                        <span class="status-indicator online"></span>
-                    </div>
+                    <a href="/profile" class="header-profile-link" style="text-decoration: none;">
+                        <div class="header-profile-badge">
+                            <div class="avatar-circle">{student_initial}</div>
+                            <span class="status-indicator online"></span>
+                        </div>
+                    </a>
                 </header>
                 
                 <section class="dashboard-matrix-grid">
