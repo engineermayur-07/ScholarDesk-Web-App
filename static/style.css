@@ -2228,3 +2228,51 @@ input[type="date"] {
     display: inline-block;
     text-align: center;
 }
+
+/* ==========================================================================
+   PRODUCTION NOTEBOOK MANAGEMENT UTILITY ELEMENTS
+   ========================================================================== */
+
+/* Enhanced Long Textarea Elements */
+.notes-large-textarea {
+    width: 100%;
+    min-height: 160px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background-color: #f8fafc;
+    font-family: inherit;
+    resize: vertical;
+    line-height: 1.6;
+    transition: all 0.2s ease;
+}
+
+.notes-large-textarea:focus {
+    outline: none;
+    border-color: #23a6d5;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(35, 166, 213, 0.15);
+}
+
+/* Notebook Table Cell Elements */
+.notes-table-content-text {
+    font-weight: 500;
+    color: #334155;
+    line-height: 1.6;
+    white-space: pre-wrap; /* Preserves natural user breaks and paragraph splits */
+    word-break: break-word;
+}
+
+.notes-date-pill {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: inline-block;
+}

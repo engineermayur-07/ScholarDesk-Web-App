@@ -703,14 +703,6 @@ def notes():
                         <p>Organize thoughts, archive study materials, and audit core revisions</p>
                     </div>
                     
-                    <div class="header-quick-filters">
-                        <a href="/completed_notes" class="btn-filter-tab status-complete">
-                            <span class="dot-indicator"></span> Completed Revisions
-                        </a>
-                        <a href="/incomplete_notes" class="btn-filter-tab status-pending">
-                            <span class="dot-indicator"></span> Pending Backlogs
-                        </a>
-                    </div>
                 </header>
                 
                 <div class="notes-utility-bar">
@@ -745,17 +737,7 @@ def notes():
                         <span class="notes-action-arrow">→</span>
                     </a>
 
-                    <a href="/mark_note" class="notes-action-card">
-                        <div class="notes-card-accent border-amber"></div>
-                        <div class="notes-card-body">
-                            <div class="notes-icon-wrapper text-amber">🎯</div>
-                            <div class="notes-card-content">
-                                <h3>Complete Review Cycle</h3>
-                                <p>Flag a curriculum study notebook entry as fully processed, removing it from your active urgent workload.</p>
-                            </div>
-                        </div>
-                        <span class="notes-action-arrow">→</span>
-                    </a>
+                     
 
                     <a href="/delete_note" class="notes-action-card">
                         <div class="notes-card-accent border-red"></div>
@@ -779,134 +761,289 @@ def notes():
     '''
 @app.route('/view_notes')
 def web_view_notes():
-    if 'email' not in session:
+    # Security checkpoint gate
+    if 'email' not in session or not session['email']:
         return redirect(url_for('login_user'))
         
-     
     notes_data = view_notes(session['email'])
     
+    # Unified Structural Sidebar Block
+    sidebar_html = f'''
+    <aside class="workspace-sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-avatar">🎓</span>
+            <div class="brand-text">
+                <h3>Scholar Desk</h3>
+                <span class="system-badge">v2.4 Core</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="/dashboard" class="menu-item"><span class="menu-icon">🎛️</span> Workspace Home</a>
+            <a href="/notes" class="menu-item active"><span class="menu-icon">📝</span> Notes Engine</a>
+            <a href="/tasks" class="menu-item"><span class="menu-icon">📅</span> Task Manager</a>
+            <a href="/tools" class="menu-item"><span class="menu-icon">📊</span> Academic Tools</a>
+            <a href="/finance" class="menu-item"><span class="menu-icon">💳</span> Expense Tracker</a>
+            <a href="/chatbot" class="menu-item highlight-ai"><span class="menu-icon">🤖</span> Saathi AI Assistant</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="btn-sidebar-logout"><span>🔒 Terminate Session</span></a>
+        </div>
+    </aside>
+    '''
+
+    # SCENARIO A: PERSONAL STUDY BINDER IS COMPLETELY VACANT
     if not notes_data:
-        return '''
+        return f'''
         <!DOCTYPE html>
         <html>
         <head>
-            <title>View Notes | Scholar Desk</title>
+            <title>Lecture Notes | Scholar Desk</title>
             <link rel="stylesheet" href="/static/style.css">
         </head>
-        <body>
-            <div class="data-container" style="text-align: center; max-width: 500px;">
-                <h1 style="font-size: 3rem;">📝</h1>
-                <h2>No Notes Found</h2>
-                <p style="color: #7f8c8d; margin-bottom: 25px;">Your personal study binder is currently empty.</p>
-                <a href="/add_note" class="btn-submit" style="text-decoration: none; display: block;">✍️ Create Your First Note</a>
-                <br>
-                <a href="/notes" class="link-flat">← Back to Notes Hub</a>
+        <body class="dashboard-body">
+            <div class="workspace-layout">
+                {sidebar_html}
+                <main class="workspace-main" style="display: flex; align-items: center; justify-content: center;">
+                    <div class="empty-state-panel" style="max-width: 540px; padding: 50px;">
+                        <span class="empty-state-icon">📝</span>
+                        <h2>Notebook Repository Vacant</h2>
+                        <p>Your institutional cloud binder has no saved notes recorded under this profile yet. Log summaries, structural equations, or test concepts cleanly.</p>
+                        <a href="/add_note" class="btn-ledger-primary" style="background: linear-gradient(135deg, #23a6d5, #23d5ab); box-shadow: 0 4px 12px rgba(35,166,213,0.2);">✍️ Create First Note Entry</a>
+                    </div>
+                </main>
             </div>
         </body>
         </html>
         '''
-        
-    html_output = '''
+
+    # SCENARIO B: COMPILED DATABASE DATA LOCATED
+    table_rows = ""
+    for note in notes_data:
+        table_rows += f'''
+        <tr>
+            <td><span class="ledger-id-hash">#{note[0]}</span></td>
+            <td class="notes-table-content-text">{note[2]}</td>
+            <td><span class="notes-date-pill">{note[3]}</span></td>
+        </tr>
+        '''
+
+    return f'''
     <!DOCTYPE html>
     <html>
     <head>
         <title>Your Notebook | Scholar Desk</title>
         <link rel="stylesheet" href="/static/style.css">
     </head>
-    <body>
-        <div class="data-container">
-            <h1>📝 Your Saved Lecture Notes</h1>
-            <p style="color: #7f8c8d; margin-top: -5px;">Review, structure, and keep track of your core subject logs.</p>
-            <p>
-                <a href="/notes" class="link-flat">← Notes Hub Menu</a> | 
-                <a href="/add_note" class="link-flat">➕ Add Fresh Note</a>
-            </p>
+    <body class="dashboard-body">
+        <div class="workspace-layout">
+            {sidebar_html}
             
-            <div class="table-responsive">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 15%;">Note ID</th>
-                            <th class="text-left" style="width: 60%;">Subject Content / Topic</th>
-                            <th style="width: 25%;">Date Logged</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-    '''
-    for note in notes_data:
-        # Assuming note[2] is the Topic and note[3] is the Content
-        html_output += f'''
-                        <tr>
-                            <td><code>#{note[0]}</code></td>
-                            <td class="text-left" style="font-weight: 600; color: #2c3e50;">{note[2]}</td>
-                            <td><span class="badge badge-date">{note[3]}</span></td>
-                        </tr>
-        '''
-        
-    html_output += '''
-                    </tbody>
-                </table>
-            </div>
-            <div style="margin-top: 30px;">
-                <a href="/dashboard" class="link-flat">← Return to Main Workspace</a>
-            </div>
+            <main class="workspace-main">
+                <header class="main-header">
+                    <div class="header-welcome">
+                        <h1>📝 Your Saved Lecture Notes</h1>
+                        <p>Review course topics, read indexed curriculum synopses, and manage your core study logs</p>
+                    </div>
+                    <div>
+                        <a href="/add_note" class="btn-ledger-primary" style="background: linear-gradient(135deg, #23a6d5, #23d5ab); box-shadow: 0 4px 12px rgba(35,166,213,0.2);">➕ Add Fresh Note</a>
+                    </div>
+                </header>
+
+                <!-- Expanded Production Level Table Block Wrapper -->
+                <div class="table-card-wrapper">
+                    <table class="enterprise-data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Note ID</th>
+                                <th style="width: 65%;">Subject Content / Topic Description</th>
+                                <th style="width: 20%;">Date Logged</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {table_rows}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <a href="/notes" class="btn-ledger-secondary">← Return to Notes Management Hub</a>
+                </div>
+            </main>
         </div>
     </body>
     </html>
     '''
-    return html_output
+
+
 @app.route('/add_note', methods=['GET', 'POST'])
 def web_add_note():
-    if 'email' not in session:
+    if 'email' not in session or not session['email']:
         return redirect(url_for('login_user'))
     
     if request.method == 'POST':
-        note = request.form['note']
-        date = request.form['date']
-        add_notes(session['email'],note,date)
+        note = request.form.get('note')
+        raw_date = request.form.get('date') # Format arrives from browser object as 'YYYY-MM-DD'
+        
+        # 🚀 AUTOMATIC DATABASE TRACE ALIGNMENT: 
+        # Breaks 'YYYY-MM-DD' apart and switches it to match your strict 'DD-MM-YYYY' database format
+        if raw_date and '-' in raw_date:
+            year, month, day = raw_date.split('-')
+            formatted_date = f"{day}-{month}-{year}"
+        else:
+            formatted_date = raw_date
+
+        add_notes(session['email'], note, formatted_date)
         return redirect(url_for('web_view_notes'))
     
-    return '''
+    # Unified Sidebar Frame Fragment
+    sidebar_html = f'''
+    <aside class="workspace-sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-avatar">🎓</span>
+            <div class="brand-text">
+                <h3>Scholar Desk</h3>
+                <span class="system-badge">v2.4 Core</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="/dashboard" class="menu-item"><span class="menu-icon">🎛️</span> Workspace Home</a>
+            <a href="/notes" class="menu-item active"><span class="menu-icon">📝</span> Notes Engine</a>
+            <a href="/tasks" class="menu-item"><span class="menu-icon">📅</span> Task Manager</a>
+            <a href="/tools" class="menu-item"><span class="menu-icon">📊</span> Academic Tools</a>
+            <a href="/finance" class="menu-item"><span class="menu-icon">💳</span> Expense Tracker</a>
+            <a href="/chatbot" class="menu-item highlight-ai"><span class="menu-icon">🤖</span> Saathi AI Assistant</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="btn-sidebar-logout"><span>🔒 Terminate Session</span></a>
+        </div>
+    </aside>
+    '''
+
+    return f'''
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Add Note | Scholar Desk</title>
+        <title>Create Note | Scholar Desk</title>
         <link rel="stylesheet" href="/static/style.css">
     </head>
-    <body>
-        <div class="form-container" style="min-height: 70vh;">
-            <div class="form-card" style="max-width: 500px;">
-                <h2>📝 Create Fresh Note</h2>
-                <p style="color: #7f8c8d; font-size: 0.9rem; margin-top: -20px; margin-bottom: 25px;">
-                    Log your ideas, class topics, or reminders directly into your database.
-                </p>
+    <body class="dashboard-body">
+        <div class="workspace-layout">
+            {sidebar_html}
+
+            <main class="workspace-main" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                 
-                <form method="post">
-                    <div class="input-field" style="margin-bottom: 20px;">
-                        <label>Note Description / Content</label>
-                        <textarea name="note" rows="6" placeholder="Type your lecture summary or study reminders here..." required 
-                            style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; font-family: inherit; resize: vertical; box-sizing: border-box; transition: all 0.3s ease;"></textarea>
+                <!-- Expanded Form Layout Box to completely erase empty screen margins -->
+                <div class="ledger-form-card" style="max-width: 580px; width: 100%; padding: 45px;">
+                    <div class="ledger-form-header" style="margin-bottom: 35px;">
+                        <h2>📝 Create Fresh Note</h2>
+                        <p>Log active lecture concepts, research timelines, or assignment reminders cleanly down to your personal cloud stack index.</p>
                     </div>
+
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="note">Note Description / Core Content Summaries</label>
+                            <textarea id="note" name="note" rows="7" placeholder="Type your full lecture summary, formula proofs, or workspace items here..." required class="notes-large-textarea"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Date Mentioned</label>
+                            <!-- 📆 Graphical calendar selector to preserve zero-entry mistake parameters -->
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-ledger-submit" style="background: linear-gradient(135deg, #34495e, #1e293b); box-shadow: 0 4px 12px rgba(52,73,94,0.15); margin-top: 10px;">
+                            <span>Securely Save to Notebook</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
                     
-                    <div class="input-field" style="margin-bottom: 30px;">
-                        <label>Date Mentioned (DD-MM-YYYY)</label>
-                        <input type="text" name="date" placeholder="29-05-2026" required>
+                    <div class="ledger-form-footer" style="margin-top: 25px;">
+                        <a href="/notes" class="btn-ledger-secondary">Cancel and Revert Back</a>
                     </div>
-                    
-                    <button type="submit" class="btn-register" style="background: linear-gradient(135deg, #34495e, #2c3e50); box-shadow: 0 4px 15px rgba(52, 73, 94, 0.2);">
-                        <span>Save to Notebook</span>
-                        <span class="btn-arrow">→</span>
-                    </button>
-                </form>
+                </div>
                 
-                <p class="auth-meta">
-                    <a href="/notes" class="link-highlight" style="color: #34495e;">← Back to Notes Hub</a>
-                </p>
-            </div>
+            </main>
         </div>
     </body>
     </html>
     '''
+@app.route('/delete_note', methods=['GET', 'POST'])
+def web_delete_note():
+    # Security Guardrail Check
+    if 'email' not in session or not session['email']:
+        return redirect(url_for('login_user'))
+        
+    if request.method == 'POST':
+        note_id = request.form.get('note_id')
+        delete_notes(session['email'], note_id)
+        return redirect(url_for('web_view_notes'))
+
+    # Left Lateral Navigation Sidebar Panel (Matches Global Workspace Design)
+    sidebar_html = f'''
+    <aside class="workspace-sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-avatar">🎓</span>
+            <div class="brand-text">
+                <h3>Scholar Desk</h3>
+                <span class="system-badge">v2.4 Core</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="/dashboard" class="menu-item"><span class="menu-icon">🎛️</span> Workspace Home</a>
+            <a href="/notes" class="menu-item active"><span class="menu-icon">📝</span> Notes Engine</a>
+            <a href="/tasks" class="menu-item"><span class="menu-icon">📅</span> Task Manager</a>
+            <a href="/tools" class="menu-item"><span class="menu-icon">📊</span> Academic Tools</a>
+            <a href="/finance" class="menu-item"><span class="menu-icon">💳</span> Expense Tracker</a>
+            <a href="/chatbot" class="menu-item highlight-ai"><span class="menu-icon">🤖</span> Saathi AI Assistant</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="btn-sidebar-logout"><span>🔒 Terminate Session</span></a>
+        </div>
+    </aside>
+    '''
+
+    # --- GET REQUEST: RENDER HIGH-CONTRAST DELETION SUITE ---
+    return f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Purge Notebook | Scholar Desk</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body class="dashboard-body">
+        <div class="workspace-layout">
+            
+            {sidebar_html}
+
+            <main class="workspace-main" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div class="ledger-form-card" style="border-top: 4px solid #ef4444;">
+                    <div class="ledger-form-header">
+                        <h2 style="color: #ef4444;">🗑️ Discard Notebook Entry</h2>
+                        <p>Provide the specific alphanumeric <b>Notebook ID Token</b> below to wipe this study log permanently out of your database records.</p>
+                    </div>
+
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="note_id">Target Notebook ID Number</label>
+                            <input type="number" id="note_id" name="note_id" placeholder="e.g., 12" min="1" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-ledger-submit" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                            <span>Authorize Permanent Purge</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                    
+                    <div class="ledger-form-footer">
+                        <a href="/notes" class="btn-ledger-secondary">Cancel and Abort Action</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>
+    '''
+    
 
 @app.route('/tasks')
 def tasks():
@@ -1053,7 +1190,7 @@ def tasks():
     </body>
     </html>
     '''
-# --- GLOBAL COMPONENT: UNIFIED TASK SIDEBAR CONTEXT ---
+
 def get_tasks_sidebar():
     return f'''
     <aside class="workspace-sidebar">
@@ -1497,6 +1634,7 @@ def view_incomplete_task():
     </body>
     </html>
     '''
+
 @app.route('/finance', methods=['GET', 'POST'])
 def finance():
     # Security Guardrail Check
@@ -1727,7 +1865,102 @@ def view_expense():
     </body>
     </html>
     '''
+@app.route('/add_expense', methods=['GET', 'POST'])
+def add_expense():
+    if 'email' not in session or not session['email']:
+        return redirect(url_for('login_user'))
+        
+    if request.method == 'POST':
+        amount = request.form.get('amount')
+        category = request.form.get('category')
+        
+        # 🚀 THE STRING REARRANGEMENT CONVERTER:
+        # Takes the incoming HTML 'YYYY-MM-DD' and parses it back to 'DD-MM-YYYY'
+        raw_date = request.form.get('date') # e.g., '2026-05-29'
+        if raw_date and '-' in raw_date:
+            year, month, day = raw_date.split('-')
+            formatted_date = f"{day}-{month}-{year}" # Becomes '29-05-2026'
+        else:
+            formatted_date = raw_date
 
+        # Pass the cleanly formatted string safely down to your database
+        expenses_tracker(session['email'], amount, category, formatted_date)
+        return redirect(url_for('view_expense'))
+    
+    # Base Navigation Layout Sidebar Segment
+    sidebar_html = f'''
+    <aside class="workspace-sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-avatar">🎓</span>
+            <div class="brand-text">
+                <h3>Scholar Desk</h3>
+                <span class="system-badge">v2.4 Core</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="/dashboard" class="menu-item"><span class="menu-icon">🎛️</span> Workspace Home</a>
+            <a href="/notes" class="menu-item"><span class="menu-icon">📝</span> Notes Engine</a>
+            <a href="/tasks" class="menu-item"><span class="menu-icon">📅</span> Task Manager</a>
+            <a href="/tools" class="menu-item"><span class="menu-icon">📊</span> Academic Tools</a>
+            <a href="/finance" class="menu-item active"><span class="menu-icon">💳</span> Expense Tracker</a>
+            <a href="/chatbot" class="menu-item highlight-ai"><span class="menu-icon">🤖</span> Saathi AI Assistant</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/logout" class="btn-sidebar-logout"><span>🔒 Terminate Session</span></a>
+        </div>
+    </aside>
+    '''
+
+    return f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Record Outlay | Scholar Desk</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body class="dashboard-body">
+        <div class="workspace-layout">
+            
+            {sidebar_html}
+
+            <main class="workspace-main" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div class="ledger-form-card">
+                    <div class="ledger-form-header">
+                        <h2>💸 Record New Outlay</h2>
+                        <p>Log active transactional variables below to calculate your running allowance threshold.</p>
+                    </div>
+
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="amount">Transaction Amount (INR)</label>
+                            <input type="number" id="amount" name="amount" placeholder="₹ 0.00" min="1" step="any" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category Classification</label>
+                            <input type="text" id="category" name="category" placeholder="e.g., Subscriptions, Mess, Transit, Books" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Value Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-ledger-submit">
+                            <span>Authorize and Append Entry</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                    
+                    <div class="ledger-form-footer">
+                        <a href="/view_expense" class="btn-ledger-secondary">Cancel and Return to View</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>
+    '''
 
 # --- SHARED GLOBAL COMPONENTS FOR THE TOOLS ECOSYSTEM ---
 def get_tools_sidebar():
