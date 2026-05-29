@@ -849,7 +849,7 @@ def notes():
                 
                 <header class="main-header">
                     <div class="header-welcome">
-                        <h1>📚 Lecture Notes Hub</h1>
+                        <h1>📚 Notes Hub</h1>
                         <p>Organize thoughts, archive study materials, and audit core revisions</p>
                     </div>
                     
@@ -857,7 +857,10 @@ def notes():
                 
                 <div class="notes-utility-bar">
                     <div class="utility-meta-info">
-                        Workspace Session Active: <b>{session.get("name", "Scholar")}</b>
+                        Notes Manager : <span style="color: #38bdf8; font-weight: 600;">Activated</span>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 500;">
+                         Account Profile : {session.get("name", "Scholar")}
                     </div>
                 </div>
                 
@@ -1278,7 +1281,10 @@ def tasks():
                 
                 <div class="notes-utility-bar">
                     <div class="utility-meta-info">
-                        Schedule Tracking Matrix: <b>{session.get("name", "Scholar")}</b>
+                        Student Task Manager : <span style="color: #38bdf8; font-weight: 600;">Activated</span>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 500;">
+                         Account Profile : {session.get("name", "Scholar")}
                     </div>
                 </div>
                 
@@ -2600,7 +2606,7 @@ def chatbot_user():
                         <div class="msg-avatar">🤖</div>
                         <div class="msg-bubble bubble-ai">
                             <span class="msg-sender-name">Saathi AI</span>
-                            <p>Greetings! I am your advanced academic workspace companion shell. Developed by Mayur B. Gund and Arjun B. Kadam, my neural weights are ready to process curriculum context. Ask me anything or type <b>'clear'</b> to flush our session history stack.</p>
+                            <p>Greetings! I am your advanced academic workspace companion shell. Developed by <b>Mayur B. Gund</b> and <b>Arjun B. Kadam</b>, my neural weights are ready to process curriculum context. Ask me anything or type <b>'clear'</b> to flush our session history .</p>
                         </div>
                     </div>
 
@@ -2609,13 +2615,14 @@ def chatbot_user():
 
                 <footer class="chat-input-dock">
                     <form id="chatForm" class="chat-form-layout">
-                        <input type="text" id="userInput" name="message" placeholder="Ask Saathi anything... (e.g., Explain standard normal distribution properties)" required autocomplete="off">
+                        <input type="text" id="userInput" name="message" placeholder="Ask Saathi " required autocomplete="off">
                         <button type="submit" id="sendBtn">
                             <span>Submit Prompt</span>
                             <span class="btn-arrow">→</span>
                         </button>
                     </form>
-                    <p class="chat-compliance-subtext">Scholar Desk Cognitive Computing Unit. Responses format explicitly inside academic sub-sections.</p>
+                    <p class="chat-compliance-subtext">Scholar Desk Saathi AI. Verify information provided. AI can make mistakes.</p>
+                    <p class="chat-compliance-subtext">All rights reserved with Scholar Desk</p>
                 </footer>
                 
             </main>
@@ -2858,10 +2865,10 @@ def tools():
                 
                 <div class="notes-utility-bar">
                     <div class="utility-meta-info">
-                        Engine Environment Deployment Mode: <span style="color: #38bdf8; font-weight: 600;">Active Platform Grid</span>
+                        Essential academic toolkit : <span style="color: #38bdf8; font-weight: 600;">Activated</span>
                     </div>
                     <div style="font-size: 0.85rem; color: #64748b; font-weight: 500;">
-                        Operator ID: {session.get("name", "Scholar")}
+                         Account Profile : {session.get("name", "Scholar")}
                     </div>
                 </div>
                 
