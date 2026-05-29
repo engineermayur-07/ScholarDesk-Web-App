@@ -675,7 +675,7 @@ def dashboard():
                     <span class="brand-avatar">🎓</span>
                     <div class="brand-text">
                         <h3>Scholar Desk</h3>
-                        <span class="system-badge">v2.4 Core</span>
+                        <span class="system-badge">for student by student</span>
                     </div>
                 </div>
                 
@@ -813,7 +813,7 @@ def notes():
                     <span class="brand-avatar">🎓</span>
                     <div class="brand-text">
                         <h3>Scholar Desk</h3>
-                        <span class="system-badge">v2.4 Core</span>
+                        <span class="system-badge">for student by student</span>
                     </div>
                 </div>
                 
@@ -924,7 +924,7 @@ def web_view_notes():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -1052,7 +1052,7 @@ def web_add_note():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -1135,7 +1135,7 @@ def web_delete_note():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -1226,7 +1226,7 @@ def tasks():
                     <span class="brand-avatar">🎓</span>
                     <div class="brand-text">
                         <h3>Scholar Desk</h3>
-                        <span class="system-badge">v2.4 Core</span>
+                        <span class="system-badge">for student by student</span>
                     </div>
                 </div>
                 
@@ -1348,7 +1348,7 @@ def get_tasks_sidebar():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -1816,7 +1816,7 @@ def finance():
                     <span class="brand-avatar">🎓</span>
                     <div class="brand-text">
                         <h3>Scholar Desk</h3>
-                        <span class="system-badge">v2.4 Core</span>
+                        <span class="system-badge">for student by student</span>
                     </div>
                 </div>
                 
@@ -1915,7 +1915,7 @@ def view_expense():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -2044,7 +2044,7 @@ def add_expense():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -2120,7 +2120,7 @@ def get_tools_sidebar():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -2573,7 +2573,7 @@ def tools():
                     <span class="brand-avatar">🎓</span>
                     <div class="brand-text">
                         <h3>Scholar Desk</h3>
-                        <span class="system-badge">v2.4 Core</span>
+                        <span class="system-badge">for student by student</span>
                     </div>
                 </div>
                 

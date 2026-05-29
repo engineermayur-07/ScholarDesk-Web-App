@@ -37,6 +37,7 @@ def email_checker(email):
     return re.match(pattern,email) is not None
 
 def age_check(age):
+    age=int(age)
     if(age<10):
         return False
     elif(age>90):
