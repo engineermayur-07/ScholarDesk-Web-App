@@ -6,7 +6,7 @@ def init_db():
     conn = sqlite3.connect('student_toolkit.db')
     cursor = conn.cursor()
     
-    #Students Table
+    # Create Students Table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS students (
             email TEXT PRIMARY KEY,
@@ -19,7 +19,7 @@ def init_db():
     ''')
 
   
-    #Tasks Table
+    # Tasks Table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS tasks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,7 +30,7 @@ def init_db():
             FOREIGN KEY (student_email) REFERENCES students (email)
         )
     ''')
-    #Expense Table
+    # Expense Table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS expenses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,4 +45,4 @@ def init_db():
  
     conn.commit()
     conn.close()
-    print("🗄️ Database verification complete. All tables are ready.")
+    print("Database verification complete. All tables are ready.")

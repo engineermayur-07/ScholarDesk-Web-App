@@ -18,7 +18,7 @@ def expenses_tracker(email,amount=None,category=None,date=None):
     ''',(email,amount,category,date))
     conn.commit()
     conn.close()
-    return f"✅ Expense added successfully!"
+    return f"Expense added successfully!"
 
 def view_expenses(email):
     conn=sqlite3.connect("student_toolkit.db")

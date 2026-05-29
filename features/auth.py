@@ -5,7 +5,11 @@ def student_Registration(name=None, email=None, password=None, age=None, class_=
      
     
     # Connect to check if email exists
+    # Conn = sqlite3.connect(':memory:')
     conn = sqlite3.connect('student_toolkit.db')
+    # Connection to database and creates if it doesn't exist
+    
+    
     cursor = conn.cursor()
     
     cursor.execute("SELECT email FROM students WHERE email = ?", (email,))
@@ -37,7 +41,7 @@ def login(email=None, password=None):
     
     # Search for a row matching BOTH email and password
     cursor.execute("SELECT * FROM students WHERE email = ? AND password = ?", (email, password))
-    student = cursor.fetchone()
+    student = cursor.fetchone() #returns none if not found
     conn.close()
     
     if student:
@@ -66,7 +70,7 @@ def reset_password(email, contact, new_password):
         # Update the password in the database
         cursor.execute("UPDATE students SET password = ? WHERE email = ?", (new_password, email))
         conn.commit()
-        return True,f"✅ Password reset successful."
+        return True,f"Password reset successful."
     else:
         return False,f"❌ Email not found. Please register first."
         

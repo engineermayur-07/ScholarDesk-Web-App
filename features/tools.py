@@ -42,7 +42,7 @@ def attendance_tracker(lec_attended=None, total_lec=None):
         return f"❌ Total number of lectures cannot be empty. Please try again."
     if lec_attended > total_lec:
         return f"❌ Lectures attended cannot be greater than total lectures. Please try again."
-    return f"\n✅ Your Attendance Percentage is: {(lec_attended/total_lec)*100:.2f}%"   
+    return f"\nYour Attendance Percentage is: {(lec_attended/total_lec)*100:.2f}%"   
     
 
 # features/academics.py

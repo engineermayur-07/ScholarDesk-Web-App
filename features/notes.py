@@ -3,17 +3,17 @@ from features.utility import *
 
 def add_notes(email,note=None,date=None):
     if not date_checker(date):
-        return f"❌ Invalid date format. Please enter the date in DD-MM-YYYY format."
+        return f"Invalid date format. Please enter the date in DD-MM-YYYY format."
         
     conn=sqlite3.connect("student_toolkit.db")
     cursor=conn.cursor()
     cursor.execute('''
         INSERT INTO notes(student_email,note,date) VALUES(?,?,?)
     ''',(email,note,date))
-    print("✅ Note added successfully!")
+    print("Note added successfully!")
     conn.commit()
     conn.close()
-    return f"✅ Note added successfully!"
+    return f"Note added successfully!"
 
 def view_notes(email):
     conn=sqlite3.connect("student_toolkit.db")
@@ -25,10 +25,10 @@ def view_notes(email):
         return notes
          
     else:
-        print("❌ No notes found.")
+        print("No notes found.")
         conn.commit()
         conn.close()
-        return f"❌ No notes found."
+        return f"No notes found."
 
 def delete_notes(email,note_id=None):
     conn=sqlite3.connect("student_toolkit.db")
@@ -36,7 +36,7 @@ def delete_notes(email,note_id=None):
     cursor.execute("SELECT * FROM notes WHERE student_email = ?", (email,))
     notes=cursor.fetchall()
     if notes:
-        print("✅ Notes found!")
+        print("Notes found!")
          
         flag=False
         for note in notes:
@@ -46,14 +46,14 @@ def delete_notes(email,note_id=None):
         if flag==False:
             conn.commit()
             conn.close()
-            return f"❌ Invalid note ID. Please try again."
+            return f"Invalid note ID. Please try again."
         cursor.execute("DELETE FROM notes WHERE id = ? AND student_email = ?", (note_id, email))
         
         conn.commit()
         conn.close()
 
-        return f"✅ Note deleted successfully."
+        return f"Note deleted successfully."
     else:
         conn.commit()
         conn.close()
-        return f"❌ No notes found."
+        return f"No notes found."

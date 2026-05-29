@@ -31,7 +31,7 @@ def Saathi():
          Be creative in your explanations and try to make learning enjoyable. Use examples and analogies when appropriate to help clarify complex concepts."""
 
     # 3. Create a chat session with the system instructions integrated
-    print("🤖 Saathi: Establishing connection to AI...")
+    print("Saathi: Establishing connection to AI...")
     chat = client.chats.create(
         model="gemini-2.5-flash",
         config=types.GenerateContentConfig(
@@ -40,7 +40,7 @@ def Saathi():
         )
     )
 
-    print("\n🤖 Saathi: Fully initialized and live! (Type 'exit' to quit)")
+    print("\nSaathi: Fully initialized and live! (Type 'exit' to quit)")
     print("-" * 70)
 
     # 4. Continuous Live Interaction Loop
@@ -52,13 +52,13 @@ def Saathi():
                 continue
                 
             if user_input.lower() in ["exit", "quit","stop","Exit","Quit","Stop","EXIT","QUIT","STOP"]:
-                print("\n🤖 Saathi: Thank you and All the best.")
+                print("\nSaathi: Thank you and All the best.")
                 break
 
             # Send message to the model; the chat object implicitly holds the historical context
             response = chat.send_message(user_input)
             
-            print(f"\n🤖 Saathi: {response.text}\n")
+            print(f"\nSaathi: {response.text}\n")
             print("-" * 70)
             print("")
 
