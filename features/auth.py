@@ -15,8 +15,11 @@ def student_Registration(name=None, email=None, password=None, age=None, class_=
 
     if not password_checker(password):
         return False,f"❌ Weak password. Please try again."
-     
-    
+    if not email_checker(email):
+        return False,f"Invalid Email"
+    if not age_check(age):
+        return False,f"This app is not for you"
+        
     cursor.execute('''
         INSERT INTO students (email, name, password, age, class, contact_info) 
         VALUES (?, ?, ?, ?, ?, ?)

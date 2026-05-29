@@ -1,3 +1,4 @@
+import re
 def date_checker(date):
     try:
         day, month, year = map(int, date.split('-'))
@@ -30,3 +31,15 @@ def password_checker(password):
         print("❌ Password must contain at least one letter.")
         return False
     return True
+
+def email_checker(email):
+    pattern=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern,email) is not None
+
+def age_check(age):
+    if(age<10):
+        return False
+    elif(age>90):
+        return False
+    else:
+        return True
