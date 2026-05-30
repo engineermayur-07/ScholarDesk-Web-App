@@ -4,7 +4,7 @@
 
 **A unified, full-stack web application engineered to streamline student academic life.**
 
-[![Live Website](https://img.shields.io/badge/🌐%20Live%20Website-engineermayur07.pythonanywhere.com-38bdf8?style=for-the-badge)](https://www.engineermayur07.pythonanywhere.com)
+[![Live Website](https://img.shields.io/badge/🌐%20Live%20Website-scholardesk.pythonanywhere.com-38bdf8?style=for-the-badge)](https://www.scholardesk.pythonanywhere.com)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.1.3-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
@@ -143,7 +143,7 @@ The application will be accessible at `http://127.0.0.1:5000`.
 
 The application is live and accessible at:
 
-**[https://www.engineermayur07.pythonanywhere.com](https://www.engineermayur07.pythonanywhere.com)**
+**[https://www.engineermayur07.pythonanywhere.com](https://www.scholardesk.pythonanywhere.com)**
 
 ---
 
