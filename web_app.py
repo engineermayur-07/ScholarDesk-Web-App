@@ -2545,7 +2545,7 @@ def chatbot_user():
             <span class="brand-avatar">🎓</span>
             <div class="brand-text">
                 <h3>Scholar Desk</h3>
-                <span class="system-badge">v2.4 Core</span>
+                <span class="system-badge">for student by student</span>
             </div>
         </div>
         <nav class="sidebar-menu">
@@ -2595,7 +2595,7 @@ def chatbot_user():
                 
                 <header class="chat-header-bar">
                     <div class="chat-header-meta">
-                        <h2>🤖 Saathi AI Workspace</h2>
+                        <h2>🤖 Saathi AI </h2>
                         <p><span class="status-dot-green"></span> Gemini 2.5 Flash Core Synchronized</p>
                     </div>
                     <a href="/profile" class="header-profile-link" style="text-decoration: none;">
@@ -2611,7 +2611,7 @@ def chatbot_user():
                         <div class="msg-avatar">🤖</div>
                         <div class="msg-bubble bubble-ai">
                             <span class="msg-sender-name">Saathi AI</span>
-                            <p>Greetings! I am your advanced academic workspace companion shell. Developed by <b>Mayur B. Gund</b> and <b>Arjun B. Kadam</b>, my neural weights are ready to process curriculum context. Ask me anything or type <b>'clear'</b> to flush our session history .</p>
+                            <p>Greetings! I am Saathi, your advanced academic AI companion. Developed by <b>Mayur B. Gund</b> and <b>Arjun B. Kadam</b>, my neural weights are ready to process curriculum context.</p>
                         </div>
                     </div>
 
